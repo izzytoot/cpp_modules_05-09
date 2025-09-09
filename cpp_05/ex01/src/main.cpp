@@ -6,7 +6,7 @@
 /*   By: isabeltootill <isabeltootill@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 13:44:01 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/09/09 18:42:02 by isabeltooti      ###   ########.fr       */
+/*   Updated: 2025/09/09 20:16:12 by isabeltooti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int main(){
 			  << RES << std::endl;
 
 	std::cout << std::endl << BCYA
-			  << "*** CREATING A BUREAUCRAT AND A FORM << ***"
+			  << "*** CREATING A BUREAUCRAT AND A FORM ***"
 			  << RES << std::endl;
 	
 	Bureaucrat quiwi("Quiwi", 42);
@@ -98,6 +98,42 @@ int main(){
 	Form form1("Form 1", 20, 20);
 	std::cout << form1 << std::endl;
 
+	std::cout << std::endl << BCYA
+			  << "*** ATTRIBUTING AN INVALID GRADE TO A FORM ON CONSTRUCTION ***"
+			  << RES << std::endl;
+	try{
+		Form form2("Form 2", 200, 0);
+	}
+	catch (std::exception& e){
+		std::cout << e.what() << std::endl;
+	}
+
+	std::cout << std::endl << BCYA
+			  << "*** TESTING BE SIGNED WITH VALID AND INVALID VALUES ***"
+			  << RES << std::endl;
+	Form form3("Form 3", 50, 50);
+	std::cout << form3 << std::endl;
+	try{
+		form3.beSigned(quiwi);
+		std::cout << form3 << std::endl << std::endl;
+	} catch (std::exception& e){
+		std::cout << RED << quiwi.getName() << " couldn't sign form due to" << e.what() << RES << std::endl;
+	}
+	Bureaucrat sushi("Sushi", 100);
+	std::cout << sushi << std::endl;
+	try{
+		form3.beSigned(sushi);	
+	} catch (std::exception& e){
+		std::cout << RED << sushi.getName() << " couldn't sign " << form3.getName() << " due to " << e.what() << RES << std::endl;
+	}
+
+	std::cout << std::endl << BCYA
+			  << "*** TESTING SIGN FORM WITH VALID AND INVALID VALUES ***"
+			  << RES << std::endl;
+	quiwi.signForm(form3);
+	sushi.signForm(form3);
+	
+			  
 	std::cout << std::endl << BCYA
 			  << "*** SO LONG SU#$&RS ***"
 			  << RES << std::endl;

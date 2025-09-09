@@ -6,7 +6,7 @@
 /*   By: isabeltootill <isabeltootill@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 16:47:50 by isabeltooti       #+#    #+#             */
-/*   Updated: 2025/09/09 18:43:51 by isabeltooti      ###   ########.fr       */
+/*   Updated: 2025/09/09 20:05:44 by isabeltooti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ Form& Form::operator= (const Form& src){
 }
 
 std::ostream& operator<< (std::ostream& output, Form& form){
-    output << BCYA << "Form name: " << RES << form.getName() << std::endl
-           << BCYA << "Is signed: " << RES << (form.isSigned() ? "true" : "false") << std::endl
-           << BCYA << "Signing Grade: " << RES << form.getGradeS() << std::endl
-           << BCYA << "Executable grade: " << RES << form.getGradeE();
+    output << BYEL << "Form name: " << RES << form.getName() << std::endl
+           << BYEL << "Is signed: " << RES << (form.isSigned() ? "true" : "false") << std::endl
+           << BYEL << "Signing Grade: " << RES << form.getGradeS() << std::endl
+           << BYEL << "Executable grade: " << RES << form.getGradeE();
     return output;
 }
 
@@ -87,8 +87,14 @@ int Form::getGradeE() const{
 }
 
 void Form::beSigned(Bureaucrat& bureaucrat){
-    if (bureaucrat.getGrade() <= this->_gradeS)
-        this->_signed = true;
+    if (bureaucrat.getGrade() <= this->_gradeS){
+         this->_signed = true;
+         std::cout << BCYA 
+                   << this->_name 
+                   << " was signed by " 
+                   << bureaucrat.getName() << "." 
+                   << RES << std::endl;
+    }
     else
         throw Form::GradeTooLowException();
 }

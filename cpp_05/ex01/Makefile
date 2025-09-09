@@ -4,7 +4,7 @@
 
 NAME = ex01
 CC = c++
-CFLAGS = -Wall -Wextra -Werror -g -std=c++98 -Wshadow -Wno-shadow 
+CFLAGS = -Wall -Wextra -Werror -g -std=c++98 -Wshadow -Wno-shadow #-fsanitize=address
 
 ################################################################################
 #                                 PROGRAM'S SRCS                               #
