@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isabeltootill <isabeltootill@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 13:44:26 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/09/08 17:17:44 by icunha-t         ###   ########.fr       */
+/*   Updated: 2025/09/09 16:48:57 by isabeltooti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void Bureaucrat::incrementGrade(){
 		throw GradeTooHighException();
 	else{
 		std::cout << "incrementing... " << std::endl;
-		this->_grade++;	
+		this->_grade--;	
 	}	
 }
 

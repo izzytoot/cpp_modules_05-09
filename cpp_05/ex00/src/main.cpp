@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isabeltootill <isabeltootill@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 13:44:01 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/09/08 17:16:12 by icunha-t         ###   ########.fr       */
+/*   Updated: 2025/09/09 16:50:01 by isabeltooti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int main(){
 			  << RES << std::endl;
 	Bureaucrat rodrigo("Rodrigo", 1);
 	std::cout << rodrigo << std::endl;
-	Bureaucrat filipe("filipe", 150);
+	Bureaucrat filipe("Filipe", 150);
 	std::cout << filipe << std::endl;
 	try{
 		rodrigo.incrementGrade();
@@ -61,7 +61,7 @@ int main(){
 			  << "*** USING AN INVALID GRADE ***"
 			  << RES << std::endl;
 	try{
-		Bureaucrat philip("PHILIP", 400);
+		Bureaucrat philip("Philip", 400);
 	} 
 	catch (std::exception &e){
 		std::cout << e.what() << std::endl;
