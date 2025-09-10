@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isabeltootill <isabeltootill@student.42    +#+  +:+       +#+        */
+/*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 13:44:26 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/09/09 20:17:07 by isabeltooti      ###   ########.fr       */
+/*   Updated: 2025/09/10 10:21:51 by icunha-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ Bureaucrat::Bureaucrat(const Bureaucrat& src): _name(src._name), _grade(src._gra
 
 Bureaucrat::~Bureaucrat(){
 	std::cout << BRED 
-              << "Bureaucrat was destroyed" 
+              << "Bureaucrat "
+			  << this->_name
+			  << " was destroyed" 
               << RES << std::endl;
 }
 
