@@ -6,7 +6,7 @@
 /*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 10:40:23 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/09/11 14:26:20 by icunha-t         ###   ########.fr       */
+/*   Updated: 2025/09/11 15:50:00 by icunha-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@
 /******************************************************************************/
 
 PresidentialPardonForm::PresidentialPardonForm()
-	: AForm("noTarget", 145, 137), _target("noTarget"){
+	: AForm("noTarget", 25, 5), _target("noTarget"){
 	std::cout << BGRN
 			  << "Default PresidentialPardonForm was constructed."
 			  << RES << std::endl;
 }
 
 PresidentialPardonForm::PresidentialPardonForm(std::string target)
-	: AForm(target, 145, 137), _target(target){
+	: AForm(target, 25, 5), _target(target){
 	std::cout << BGRN
 			  << "PresidentialPardonForm with target \"" << target
 			  << "\" was constructed."
@@ -70,8 +70,8 @@ std::string PresidentialPardonForm::getTarget(){
 }
 
 void PresidentialPardonForm::specificExecution() const{
-	std::cout << BCYA
-			  << this->_target 
-			  << "has been pardoned by Zaphod Beeblebrox." 
+	std::cout << GRN
+			  << "\"" << this->_target
+			  << "\" has been pardoned by Zaphod Beeblebrox." 
 			  << RES << std::endl;
 }

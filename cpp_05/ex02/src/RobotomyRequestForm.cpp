@@ -6,7 +6,7 @@
 /*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 10:40:44 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/09/11 14:15:14 by icunha-t         ###   ########.fr       */
+/*   Updated: 2025/09/11 15:43:22 by icunha-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@
 /******************************************************************************/
 
 RobotomyRequestForm::RobotomyRequestForm()
-	: AForm("noTarget", 145, 137), _target("noTarget"){
+	: AForm("noTarget", 72, 45), _target("noTarget"){
 	std::cout << BGRN
 			  << "Default RobotomyRequestForm was constructed."
 			  << RES << std::endl;
 }
 
 RobotomyRequestForm::RobotomyRequestForm(std::string target)
-	: AForm(target, 145, 137), _target(target){
+	: AForm(target, 72, 45), _target(target){
 	std::cout << BGRN
 			  << "RobotomyRequestForm with target \"" << target
 			  << "\" was constructed."
@@ -75,7 +75,7 @@ void RobotomyRequestForm::specificExecution() const{
 			  << "trrr...chrrr...brrrr...prrr"
 			  << std::endl;
 	if (std::rand() % 2){
-		std::cout << BCYA
+		std::cout << GRN
 				  << this->_target
 			  	  << " has been robotomized!"
 				  << RES << std::endl;	
@@ -83,7 +83,7 @@ void RobotomyRequestForm::specificExecution() const{
 		std::cout << RED
 				  << "Robotomization of "
 				  << this->_target
-			  	  << " has failed!"
+			  	  << " has failed! (50%)"
 				  << RES << std::endl;	
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 13:44:45 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/09/11 14:20:04 by icunha-t         ###   ########.fr       */
+/*   Updated: 2025/09/11 14:59:17 by icunha-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,11 @@ class Bureaucrat{
 		};
 		
 		class GradeTooLowException: public std::exception{
+			public:
+				virtual const char* what() const throw();
+		};
+		
+		class ExecutionException: public std::exception{
 			public:
 				virtual const char* what() const throw();
 		};

@@ -6,7 +6,7 @@
 /*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 10:40:26 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/09/11 14:37:52 by icunha-t         ###   ########.fr       */
+/*   Updated: 2025/09/11 14:50:24 by icunha-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,4 @@ class ShrubberyCreationForm: public AForm{
 
 		std::string getTarget();
 		void specificExecution() const; //override
-		void printTree(std::ostream& output);
 };

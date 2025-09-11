@@ -6,7 +6,7 @@
 /*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 13:44:26 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/09/11 14:27:10 by icunha-t         ###   ########.fr       */
+/*   Updated: 2025/09/11 15:50:45 by icunha-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,26 +105,44 @@ void Bureaucrat::signForm(AForm& form){
 		form.sign(*this);
 		std::cout << BCYA 
 				  << "Bureaucrat " << this->getName() 
-				  << " signed " << form.getName() << "." 
+				  << " signed \"" << form.getName() << "\"." 
 				  << RES << std::endl;
 	}
 	catch(std::exception &e){
-		std::cout << RED 
+		std::cout << RED
+				  << "Bureaucrat "
 				  << this->getName() 
-				  << " couldn't sign " << form.getName() 
-				  << " due to " << e.what()
+				  << " couldn't sign \"" << form.getName() 
+				  << "\" due to " << e.what()
 				  << RES << std::endl;
 	}
 }
 
 void Bureaucrat::executeForm(const AForm& form) const{ //see if we need exception for this
+	try{
 		form.execute(*this);
+		std::cout << BCYA 
+				  << "Bureaucrat " << this->getName() 
+				  << " has completed execution of \"" << form.getName() << "\"." 
+				  << RES << std::endl;
+	}catch (std::exception& e){
+		std::cout << RED 
+				  << "Bureaucrat "
+				  << this->getName() 
+				  << " couldn't execute \"" << form.getName() 
+				  << "\" due to " << e.what()
+				  << RES << std::endl;
+	}
 }
 
 const char* Bureaucrat::GradeTooHighException::what() const throw(){
-	return "\033[0;31mBUREAUCRAT ERROR: grade too high (< 1).\033[0m";
+	return "\033[0;31mgrade too high.\033[0m";
 }
 
 const char* Bureaucrat::GradeTooLowException::what() const throw(){
-	return "\033[0;31mBUREAUCRAT ERROR: grade too low (> 150).\033[0m";
+	return "\033[0;31mgrade too low.\033[0m";
+}
+
+const char* Bureaucrat::ExecutionException::what() const throw(){
+	return "\033[0;31m form couldn't be executed.\033[0m";
 }

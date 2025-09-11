@@ -6,7 +6,7 @@
 /*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 16:47:50 by isabeltooti       #+#    #+#             */
-/*   Updated: 2025/09/11 13:12:52 by icunha-t         ###   ########.fr       */
+/*   Updated: 2025/09/11 15:11:42 by icunha-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,11 +96,6 @@ int AForm::getGradeE() const{
 void AForm::sign(const Bureaucrat& bureaucrat){
     if (bureaucrat.getGrade() <= this->_gradeS){
          this->_signed = true;
-         std::cout << BCYA 
-                   << this->_name 
-                   << " was signed by " 
-                   << bureaucrat.getName() << "." 
-                   << RES << std::endl;
     }
     else
         throw AForm::GradeTooLowException();
@@ -120,13 +115,13 @@ void AForm::execute(const Bureaucrat& executor) const{
 }
 
 const char* AForm::GradeTooHighException::what() const throw(){
-	return "\033[0;31mAFORM ERROR: grade too high (< 1).\033[0m";
+	return "\033[0;31mgrade too hig.\033[0m";
 }
 
 const char* AForm::GradeTooLowException::what() const throw(){
-    return "\033[0;31mAFORM ERROR: grade too low (> 150).\033[0m";
+    return "\033[0;31mgrade too low.\033[0m";
 }
 
 const char* AForm::FormNotSignedException::what() const throw(){
-    return "\033[0;31mAFORM ERROR: form not signed.\033[0m";
+    return "\033[0;31mform not being signed yet.\033[0m";
 }

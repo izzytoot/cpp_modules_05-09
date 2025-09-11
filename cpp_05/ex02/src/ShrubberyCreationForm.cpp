@@ -6,7 +6,7 @@
 /*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 10:40:44 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/09/11 14:39:08 by icunha-t         ###   ########.fr       */
+/*   Updated: 2025/09/11 15:18:17 by icunha-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,8 @@ void ShrubberyCreationForm::specificExecution() const{
     outFile << "_- -   | | _- _ " << std::endl;
     outFile << "  _ -  | |   -_ " << std::endl;
     outFile << "      // \\\\    " << std::endl;
+
+	std::cout << GRN
+			  << "Shrubbery form \"" << fileName << "\" was created successfully."
+			  << std::endl;
 }
