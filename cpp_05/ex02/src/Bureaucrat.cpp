@@ -6,7 +6,7 @@
 /*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 13:44:26 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/09/11 15:50:45 by icunha-t         ###   ########.fr       */
+/*   Updated: 2025/09/11 18:44:01 by icunha-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void Bureaucrat::decrementGrade(){
 
 void Bureaucrat::signForm(AForm& form){
 	try{
-		form.sign(*this);
+		form.beSigned(*this);
 		std::cout << BCYA 
 				  << "Bureaucrat " << this->getName() 
 				  << " signed \"" << form.getName() << "\"." 
@@ -118,7 +118,7 @@ void Bureaucrat::signForm(AForm& form){
 	}
 }
 
-void Bureaucrat::executeForm(const AForm& form) const{ //see if we need exception for this
+void Bureaucrat::executeForm(const AForm& form) const{
 	try{
 		form.execute(*this);
 		std::cout << BCYA 

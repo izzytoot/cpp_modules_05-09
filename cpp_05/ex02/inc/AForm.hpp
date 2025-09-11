@@ -6,7 +6,7 @@
 /*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 16:47:41 by isabeltooti       #+#    #+#             */
-/*   Updated: 2025/09/11 14:20:13 by icunha-t         ###   ########.fr       */
+/*   Updated: 2025/09/11 18:41:54 by icunha-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ class AForm{
         int getGradeS() const;
         int getGradeE() const;
 
-        void sign(Bureaucrat const& bureaucrat);
-		void checkBeforeExecution(Bureaucrat const& executor) const; //helper to centralize the check
+        void beSigned(Bureaucrat const& bureaucrat);
 		virtual void execute(const Bureaucrat& executor) const; // public interface for execution
+		void checkBeforeExecution(Bureaucrat const& executor) const; //helper to centralize the check
 		virtual void specificExecution() const = 0;//makes AForm abstract. To be overriden in the derived classes
         
 		class GradeTooHighException: public std::exception{

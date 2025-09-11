@@ -6,7 +6,7 @@
 /*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 16:47:50 by isabeltooti       #+#    #+#             */
-/*   Updated: 2025/09/11 15:11:42 by icunha-t         ###   ########.fr       */
+/*   Updated: 2025/09/11 18:43:04 by icunha-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int AForm::getGradeE() const{
     return this->_gradeE;
 }
 
-void AForm::sign(const Bureaucrat& bureaucrat){
+void AForm::beSigned(const Bureaucrat& bureaucrat){
     if (bureaucrat.getGrade() <= this->_gradeS){
          this->_signed = true;
     }
@@ -108,7 +108,6 @@ void AForm::checkBeforeExecution(const Bureaucrat& executor) const{
 		throw Bureaucrat::GradeTooLowException();
 }
 
-//we implement this pure virtual ft in the base so we have a common logic to every derived class
 void AForm::execute(const Bureaucrat& executor) const{
 	checkBeforeExecution(executor); //common check for every form
 	specificExecution(); //specific behaviour of each form

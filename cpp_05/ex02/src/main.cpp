@@ -6,7 +6,7 @@
 /*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 10:35:51 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/09/11 16:02:15 by icunha-t         ###   ########.fr       */
+/*   Updated: 2025/09/11 17:27:27 by icunha-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ int main(){
 	}
 			  
 	std::cout << std::endl << BYEL
-			  << "************ SO LONG SU#$&RS ************"
+			  << "************ SO LONG SU#@&RS ************"
 			  << RES << std::endl;
 	delete form2;
 	return 0;
