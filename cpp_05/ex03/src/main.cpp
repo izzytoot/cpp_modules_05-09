@@ -6,7 +6,7 @@
 /*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 10:35:51 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/09/11 17:27:01 by icunha-t         ###   ########.fr       */
+/*   Updated: 2025/09/11 17:33:15 by icunha-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int main(){
 			  << "*** ... SHRUBBERY WITH VALID NAME ***"
 			  << RES << std::endl;
 	try{
-		form2 = randomIntern.makeForm("Shrubbery", "drawTree");
+		form2 = randomIntern.makeForm("shrubbery creation", "drawTree");
 		isabel.signForm(*form2);
 		isabel.executeForm(*form2);
 	}catch(std::exception& e){
@@ -61,7 +61,7 @@ int main(){
 			  << "*** ... ROBOT WITH VALID NAME ***"
 			  << RES << std::endl;
 	try{
-		form3 = randomIntern.makeForm("Robot", "robotize");
+		form3 = randomIntern.makeForm("robotomy request", "robotize");
 		isabel.signForm(*form3);
 		isabel.executeForm(*form3);
 	}catch(std::exception& e){
@@ -73,7 +73,7 @@ int main(){
 			  << "*** ... PRESIDENTIAL WITH VALID NAME ***"
 			  << RES << std::endl;
 	try{
-		form4 = randomIntern.makeForm("President", "pardon");
+		form4 = randomIntern.makeForm("presidential pardon", "pardon");
 		isabel.signForm(*form4);
 		isabel.executeForm(*form4);
 	}catch(std::exception& e){

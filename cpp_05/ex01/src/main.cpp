@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isabeltootill <isabeltootill@student.42    +#+  +:+       +#+        */
+/*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 13:44:01 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/09/09 20:16:12 by isabeltooti      ###   ########.fr       */
+/*   Updated: 2025/09/11 18:35:01 by icunha-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int main(){
 	}
 
 	std::cout << std::endl << BCYA
-			  << "*** TESTING BE SIGNED WITH VALID AND INVALID VALUES ***"
+			  << "*** TESTING BESIGNED() WITH VALID AND INVALID VALUES ***"
 			  << RES << std::endl;
 	Form form3("Form 3", 50, 50);
 	std::cout << form3 << std::endl;
@@ -128,14 +128,14 @@ int main(){
 	}
 
 	std::cout << std::endl << BCYA
-			  << "*** TESTING SIGN FORM WITH VALID AND INVALID VALUES ***"
+			  << "*** TESTING SIGNFORM() WITH VALID AND INVALID VALUES ***"
 			  << RES << std::endl;
 	quiwi.signForm(form3);
 	sushi.signForm(form3);
 	
 			  
 	std::cout << std::endl << BCYA
-			  << "*** SO LONG SU#$&RS ***"
+			  << "*** SO LONG SU#@&RS ***"
 			  << RES << std::endl;
 	return 0;
 }

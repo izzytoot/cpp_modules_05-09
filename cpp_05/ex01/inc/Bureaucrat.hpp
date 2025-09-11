@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Bureaucrat.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isabeltootill <isabeltootill@student.42    +#+  +:+       +#+        */
+/*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 13:44:45 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/09/09 18:44:13 by isabeltooti      ###   ########.fr       */
+/*   Updated: 2025/09/11 18:27:17 by icunha-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ class Bureaucrat{
 		
 		void signForm(Form& form);
 		
-		class GradeTooHighException: public std::exception{ //nested class so we know the error comes from Bureaucrat
+		class GradeTooHighException: public std::exception{
 			public:
-				virtual const char* what() const throw(); //const throw guarantees that this function won't throw an exception
+				virtual const char* what() const throw();
 		};
 		
 		class GradeTooLowException: public std::exception{
@@ -61,8 +61,6 @@ class Bureaucrat{
 		};
 };
 
-//overload operator << returns ad ostream (output) with parts of object b (Bureaucrat)
-//writing to output from b
 std::ostream& operator<< (std::ostream& output, const Bureaucrat& b);
 
 #endif

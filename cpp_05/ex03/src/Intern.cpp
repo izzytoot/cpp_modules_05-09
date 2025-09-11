@@ -6,7 +6,7 @@
 /*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 16:24:43 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/09/11 17:25:03 by icunha-t         ###   ########.fr       */
+/*   Updated: 2025/09/11 17:33:56 by icunha-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ Intern& Intern::operator= (const Intern& src){
 		
 AForm* Intern::makeForm(std::string formName, std::string formTarget){
 	int index = -1;
-	std::string form[3] = {"Shrubbery", "Robot", "President"};
+	std::string form[3] = {"shrubbery creation", "robotomy request", "presidential pardon"};
 	
 	for(int i = 0; i < 3; i++){
 		if (form[i] == formName){

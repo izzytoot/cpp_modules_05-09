@@ -6,7 +6,7 @@
 /*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 16:47:50 by isabeltooti       #+#    #+#             */
-/*   Updated: 2025/09/10 10:22:52 by icunha-t         ###   ########.fr       */
+/*   Updated: 2025/09/11 18:34:39 by icunha-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,9 @@ void Form::beSigned(Bureaucrat& bureaucrat){
 }
 
 const char* Form::GradeTooHighException::what() const throw(){
-	return "\033[0;31mFORM ERROR: grade too high (< 1).\033[0m";
+	return "\033[0;31mFORM ERROR: grade too high.\033[0m";
 }
 
 const char* Form::GradeTooLowException::what() const throw(){
-    return "\033[0;31mFORM ERROR: grade too low (> 150).\033[0m";
+    return "\033[0;31mFORM ERROR: grade too low.\033[0m";
 }

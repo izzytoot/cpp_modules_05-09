@@ -6,7 +6,7 @@
 /*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 13:44:45 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/09/08 16:45:37 by icunha-t         ###   ########.fr       */
+/*   Updated: 2025/09/11 18:15:31 by icunha-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ class Bureaucrat{
 		};
 };
 
-//overload operator << returns ad ostream (output) with parts of object b (Bureaucrat)
-//writing to output from b
 std::ostream& operator<< (std::ostream& output, const Bureaucrat& b);
 
 #endif

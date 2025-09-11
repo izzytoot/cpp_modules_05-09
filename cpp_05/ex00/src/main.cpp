@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isabeltootill <isabeltootill@student.42    +#+  +:+       +#+        */
+/*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 13:44:01 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/09/09 16:50:01 by isabeltooti      ###   ########.fr       */
+/*   Updated: 2025/09/11 17:27:39 by icunha-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int main(){
 
 
 	std::cout << std::endl << BCYA
-			  << "*** SO LONG SU#$&RS ***"
+			  << "*** SO LONG SU#@&RS ***"
 			  << RES << std::endl;
 	return 0;
 }
