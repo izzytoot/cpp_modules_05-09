@@ -6,11 +6,10 @@
 /*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 10:35:51 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/09/10 18:58:47 by icunha-t         ###   ########.fr       */
+/*   Updated: 2025/09/11 14:05:11 by icunha-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/AForm.hpp"
 #include "../inc/Bureaucrat.hpp"
 #include "../inc/PresidentialPardonForm.hpp"
 #include "../inc/RobotomyRequestForm.hpp"
@@ -23,6 +22,7 @@ int main(){
 
 	// ShrubberyCreationForm form1("tree");
 	AForm* form = new ShrubberyCreationForm("tree"); 
+	form->specificExecution();
 	
 	return 0;
 }

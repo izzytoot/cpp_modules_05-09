@@ -6,7 +6,7 @@
 /*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 10:40:23 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/09/10 16:38:17 by icunha-t         ###   ########.fr       */
+/*   Updated: 2025/09/11 14:26:20 by icunha-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,15 @@
 /*                  Constructors, Copy Constructor, Destructor                 */
 /******************************************************************************/
 
-PresidentialPardonForm::PresidentialPardonForm(): AForm("noTarget", 145, 137), _target("noTarget"){
+PresidentialPardonForm::PresidentialPardonForm()
+	: AForm("noTarget", 145, 137), _target("noTarget"){
 	std::cout << BGRN
 			  << "Default PresidentialPardonForm was constructed."
 			  << RES << std::endl;
 }
 
-PresidentialPardonForm::PresidentialPardonForm(std::string target): AForm(target, 145, 137), _target(target){
+PresidentialPardonForm::PresidentialPardonForm(std::string target)
+	: AForm(target, 145, 137), _target(target){
 	std::cout << BGRN
 			  << "PresidentialPardonForm with target \"" << target
 			  << "\" was constructed."

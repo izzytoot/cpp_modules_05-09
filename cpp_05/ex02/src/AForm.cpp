@@ -6,7 +6,7 @@
 /*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 16:47:50 by isabeltooti       #+#    #+#             */
-/*   Updated: 2025/09/10 18:29:25 by icunha-t         ###   ########.fr       */
+/*   Updated: 2025/09/11 13:12:52 by icunha-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ AForm::AForm(): _name("Nameless"), _signed(false), _gradeS(150), _gradeE(150){
 			  << RES << std::endl;
 }
 
-AForm::AForm(const std::string name, const int gradeS, const int gradeE): _name(name), _signed(false), _gradeS(gradeS), _gradeE(gradeE){
+AForm::AForm(const std::string name, const int gradeS, const int gradeE)
+	: _name(name), _signed(false), _gradeS(gradeS), _gradeE(gradeE){
     if (this->_gradeS < 1 || this->_gradeE < 1)
         throw AForm::GradeTooHighException();
     else if (this->_gradeS > 150 || this->_gradeE > 150)
@@ -31,9 +32,9 @@ AForm::AForm(const std::string name, const int gradeS, const int gradeE): _name(
 			  << "AForm with name and grades was constructed."
 			  << RES << std::endl;
 }
-
-        
-AForm::AForm(const AForm& src): _name(src._name), _signed(src._signed), _gradeS(src._gradeS), _gradeE(src._gradeE){
+ 
+AForm::AForm(const AForm& src)
+	: _name(src._name), _signed(src._signed), _gradeS(src._gradeS), _gradeE(src._gradeE){
 	std::cout << BGRN 
               << "AForm was copied and constructed" 
               << RES << std::endl;
@@ -52,11 +53,15 @@ AForm::~AForm(){
 
 AForm& AForm::operator= (const AForm& src){
 	if (this != &src){
-		this->_signed = src._signed;
-	}
-	std::cout << BYEL 
+		if (this->_name != src._name || this->_gradeS != src._gradeS || this->_gradeE != src._gradeE)
+			std::cout << RED << "Invalid copy assignment." << RES << std::endl;
+		else{
+			this->_signed = src._signed;
+			std::cout << BYEL 
               << "AForm was copied with operator" 
               << RES << std::endl;
+		}
+	}
     return *this;
 }
 
@@ -88,7 +93,7 @@ int AForm::getGradeE() const{
     return this->_gradeE;
 }
 
-void AForm::sign(Bureaucrat& bureaucrat){
+void AForm::sign(const Bureaucrat& bureaucrat){
     if (bureaucrat.getGrade() <= this->_gradeS){
          this->_signed = true;
          std::cout << BCYA 
@@ -101,7 +106,7 @@ void AForm::sign(Bureaucrat& bureaucrat){
         throw AForm::GradeTooLowException();
 }
 
-void AForm::checkBeforeExecution(Bureaucrat const & executor) const{
+void AForm::checkBeforeExecution(const Bureaucrat& executor) const{
 	if (!this->_signed)
 		throw FormNotSignedException();
 	if (executor.getGrade() > this->_gradeE)
@@ -109,7 +114,7 @@ void AForm::checkBeforeExecution(Bureaucrat const & executor) const{
 }
 
 //we implement this pure virtual ft in the base so we have a common logic to every derived class
-void AForm::execute(Bureaucrat const & executor) const{
+void AForm::execute(const Bureaucrat& executor) const{
 	checkBeforeExecution(executor); //common check for every form
 	specificExecution(); //specific behaviour of each form
 }

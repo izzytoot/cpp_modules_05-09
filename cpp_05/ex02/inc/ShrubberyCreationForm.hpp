@@ -6,17 +6,14 @@
 /*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 10:40:26 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/09/10 18:56:57 by icunha-t         ###   ########.fr       */
+/*   Updated: 2025/09/11 14:37:52 by icunha-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHRUBBERYCREATIONFORM_HPP
-#define SHRUBBERYCREATIONFORM_HPP
+#pragma once
 
 #include "AForm.hpp"
 #include <fstream>
-
-#warning "Including ShrubberyCreationForm.hpp"
 
 class ShrubberyCreationForm: public AForm{
 	private:
@@ -32,8 +29,6 @@ class ShrubberyCreationForm: public AForm{
 		~ShrubberyCreationForm();
 
 		std::string getTarget();
-		void specificExecution() const;
-		void printTree(std::ostream& output) const;
+		void specificExecution() const; //override
+		void printTree(std::ostream& output);
 };
-
-#endif

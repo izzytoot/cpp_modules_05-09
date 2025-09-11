@@ -6,16 +6,14 @@
 /*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 13:44:45 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/09/10 19:02:42 by icunha-t         ###   ########.fr       */
+/*   Updated: 2025/09/11 14:20:04 by icunha-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUREAUCRAT_HPP
-#define BUREAUCRAT_HPP
+#pragma once
 
 #include <string>
 #include <iostream>
-#include "AForm.hpp"
 
 #define RED "\033[0;31m"
 #define GRN "\033[0;32m"  
@@ -27,14 +25,13 @@
 #define BCYA "\033[36;1m"
 #define RES "\033[0m"
 
-#warning "Including Bureaucrat.hpp"
-
 class AForm;
 
 class Bureaucrat{
 	private:
 		const std::string _name;
 		int _grade;
+		
 	public:
 		Bureaucrat();
 		Bureaucrat(std::string name, int grade);
@@ -50,7 +47,7 @@ class Bureaucrat{
 		void decrementGrade();
 		
 		void signForm(AForm& form);
-		void executeForm(AForm& form);
+		void executeForm(const AForm& form) const;
 		
 		class GradeTooHighException: public std::exception{ //nested class so we know the error comes from Bureaucrat
 			public:
@@ -66,5 +63,3 @@ class Bureaucrat{
 //overload operator << returns ad ostream (output) with parts of object b (Bureaucrat)
 //writing to output from b
 std::ostream& operator<< (std::ostream& output, const Bureaucrat& b);
-
-#endif

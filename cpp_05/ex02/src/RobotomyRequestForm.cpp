@@ -6,7 +6,7 @@
 /*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 10:40:44 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/09/10 16:49:13 by icunha-t         ###   ########.fr       */
+/*   Updated: 2025/09/11 14:15:14 by icunha-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,23 @@
 /*                  Constructors, Copy Constructor, Destructor                 */
 /******************************************************************************/
 
-RobotomyRequestForm::RobotomyRequestForm(): AForm("noTarget", 145, 137), _target("noTarget"){
+RobotomyRequestForm::RobotomyRequestForm()
+	: AForm("noTarget", 145, 137), _target("noTarget"){
 	std::cout << BGRN
 			  << "Default RobotomyRequestForm was constructed."
 			  << RES << std::endl;
 }
 
-RobotomyRequestForm::RobotomyRequestForm(std::string target): AForm(target, 145, 137), _target(target){
+RobotomyRequestForm::RobotomyRequestForm(std::string target)
+	: AForm(target, 145, 137), _target(target){
 	std::cout << BGRN
 			  << "RobotomyRequestForm with target \"" << target
 			  << "\" was constructed."
 			  << RES << std::endl;
 }
 
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& src): AForm(src.getName(), src.getGradeS(), src.getGradeE()){
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& src)
+	: AForm(src.getName(), src.getGradeS(), src.getGradeE()){
 	this->_target = src._target;
 	std::cout << BGRN
 			  << "RobotomyRequestForm with target \"" << _target
