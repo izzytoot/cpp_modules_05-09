@@ -2,7 +2,7 @@
 #                                     CONFIG                                   #
 ################################################################################
 
-NAME = ex00
+NAME = convert
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -g -std=c++98 -Wshadow -Wno-shadow 
 
