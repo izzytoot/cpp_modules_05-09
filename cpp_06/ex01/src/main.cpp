@@ -6,7 +6,7 @@
 /*   By: isabeltootill <isabeltootill@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 16:37:20 by isabeltooti       #+#    #+#             */
-/*   Updated: 2025/09/15 20:29:15 by isabeltooti      ###   ########.fr       */
+/*   Updated: 2025/09/16 11:04:39 by isabeltooti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../inc/Serializer.hpp"
 
 int main(void){
-    std::cout << std::endl << BCYA << "********* TEST 1 *********" << RES << std::endl;
+    std::cout << std::endl << BCYA << "********* TEST 1 - STACK ALOCATION *********" << RES << std::endl;
     Data data1;
     
     std::cout << BYEL << "Original address: " << RES << &data1 << std::endl;
@@ -27,8 +27,17 @@ int main(void){
         std::cout << BYEL << "Deserialized value: " << RES << data2 << std::endl;
     else
         std::cout << RED << "Deserialization failed." << RES << std::endl;
-
-    std::cout << std::endl << BCYA << "********* TEST 2 - with pointer *********" << RES << std::endl;
+    
+    std::cout << std::endl << BCYA << "* Setting _info value for data2 *" << RES << std::endl;
+    data2->setInfo("Santi");
+    std::cout << BYEL << "_info of data2: " << RES << data2->getInfo() << std::endl;
+    std::cout << BYEL << "_info of data1: " << RES << data1.getInfo() << std::endl;
+    std::cout << std::endl << BCYA << "* Changing _info value on data1 *" << RES << std::endl;
+    data1.setInfo("Jack");
+    std::cout << BYEL << "_info of data1 after change: " << RES << data1.getInfo() << std::endl;
+    std::cout << BYEL << "_info of data2 after change: " << RES << data2->getInfo() << std::endl;
+    
+    std::cout << std::endl << BCYA << "********* TEST 2 - HEAP ALOCATION *********" << RES << std::endl;
     Data* data3 = new Data;
     
     std::cout << BYEL << "Original address: " << RES << data3 << std::endl;
@@ -42,31 +51,18 @@ int main(void){
     else
         std::cout << RED << "Deserialization failed." << RES << std::endl;
 
-    std::cout << std::endl << BCYA << "********* TEST 3 - with value in Data *********" << RES << std::endl;
-    Data* data5 = new Data;
-    data5->setInfo("Isabel");
-
-    std::cout << BYEL << "Original _info: " << RES << data5->getInfo() << std::endl;
-    std::cout << BYEL << "Original address: " << RES << data5 << std::endl;
+    std::cout << std::endl << BCYA << "* Setting _info value for data4 *" << RES << std::endl;
+    data4->setInfo("Sushi");
+    std::cout << BYEL << "_info of data4: " << RES << data4->getInfo() << std::endl;
+    std::cout << BYEL << "_info of data3: " << RES << data3->getInfo() << std::endl;
     
-    uintptr_t ptr3 = Serializer::serialize(data5);
-    std::cout << BYEL << "Serialized value: " << RES << ptr3 << std::endl;    
-
-    Data* data6 = Serializer::deserialize(ptr3);
-    if (data6 == data5){
-        std::cout << BYEL << "Deserialized value: " << RES << data6 << std::endl;
-        
-        std::cout << std::endl << BCYA << "* Changing _info value on deserialized ptr *" << RES << std::endl;
-        data6->setInfo("Filipe");
-        std::cout << BYEL << "New _info on deserialized ptr: " << RES << data6->getInfo() << std::endl;
-        std::cout << BYEL << "New _info on original ptr: " << RES << data5->getInfo() << std::endl;
-    }
-    else
-        std::cout << RED << "Deserialization failed." << RES << std::endl;
+    std::cout << std::endl << BCYA << "* Changing _info value for data3 *" << RES << std::endl;
+    data3->setInfo("Quiwi");
+    std::cout << BYEL << "_info of data3: " << RES << data3->getInfo() << std::endl;
+    std::cout << BYEL << "_info of data4: " << RES << data4->getInfo() << std::endl;
     
     std::cout << std::endl;
-    delete data3;
-    delete data5;
-
+    if (data3) delete data3;
+    
     return 0;
 }

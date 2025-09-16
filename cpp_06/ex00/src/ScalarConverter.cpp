@@ -6,12 +6,11 @@
 /*   By: isabeltootill <isabeltootill@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 15:33:54 by isabeltooti       #+#    #+#             */
-/*   Updated: 2025/09/15 11:12:54 by isabeltooti      ###   ########.fr       */
+/*   Updated: 2025/09/15 15:06:10 by isabeltooti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ScalarConverter.hpp"
-
 
 /******************************************************************************/
 /*                  Constructors, Copy Constructor, Destructor                 */
