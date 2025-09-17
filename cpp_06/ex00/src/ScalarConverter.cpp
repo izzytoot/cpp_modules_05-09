@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScalarConverter.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isabeltootill <isabeltootill@student.42    +#+  +:+       +#+        */
+/*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 15:33:54 by isabeltooti       #+#    #+#             */
-/*   Updated: 2025/09/15 15:06:10 by isabeltooti      ###   ########.fr       */
+/*   Updated: 2025/09/17 16:20:27 by icunha-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ ScalarConverter::ScalarConverter(const ScalarConverter& src){
               << "ScalarConverter was copied and constructed" 
               << RES << std::endl;
 }
-
+strtol
 ScalarConverter::~ScalarConverter(){
 	std::cout << BRED 
               << "ScalarConverter was destroyed" 
@@ -52,6 +52,8 @@ ScalarConverter& ScalarConverter::operator= (const ScalarConverter& src){
 static bool isChar(const std::string& literal){
     if ((literal.length() == 1) && !std::isdigit(literal[0]))
         return true;
+	else if (((literal.length() == 2) && (literal[0] == '\\')) && (literal[1] == '0' || literal[1] == 'a' || literal[1] == 'b' || literal[1] == 't' || literal[1] == 'n' || literal[1] == 'v' || literal[1] == 'f' || literal[1] == 'r'))
+			return true;
     return false;
 }
 
@@ -60,13 +62,12 @@ static bool isInt(const std::string& literal){
     long nb;
 
     // strtol(string to long)
-    // base 10 -> will only accept decimal
+    // base 10 -> will only accept decimal values
     nb = std::strtol(literal.c_str(), &endptr, 10);
     if (*endptr == '\0' && (nb >= INT_MIN && nb <= INT_MAX))
         return true;
     return false;
 }
-
 
 static bool isFloat(const std::string& literal){
     if (literal == "nanf" || literal == "+inff" || literal == "inff" || literal == "-inff")
@@ -90,15 +91,74 @@ static bool isDouble(const std::string& literal){
     return false;
 }
 
-static void convFromChar(char c){
-    if(std::isprint(c))
-        std::cout << BYEL << "char: " << RES << "'" << c << "'" << std::endl;
-    else
-        std::cout << BYEL << "char: " << RES << "Non displayable" << std::endl;
-    std::cout << BYEL << "int: " << RES << static_cast<int>(c) << std::endl;
-    std::cout << std::fixed << std::setprecision(1);
-    std::cout << BYEL << "float: " << RES << static_cast<float>(c) << "f" << std::endl;
-    std::cout << BYEL << "double: " << RES << static_cast<double>(c) << std::endl;
+static void whiteSpaces(std::string literal){
+	std::cout << BYEL << "char: " << RES << "Non displayable" << std::endl;
+	if (literal[1] == '0'){
+		std::cout << BYEL << "int: " << RES << static_cast<int>('\0') << std::endl;
+		std::cout << std::fixed << std::setprecision(1);
+		std::cout << BYEL << "float: " << RES << static_cast<float>('\0') << "f" << std::endl;
+		std::cout << BYEL << "double: " << RES << static_cast<double>('\0') << std::endl;
+	}
+	else if (literal[1] == 'a'){
+		std::cout << BYEL << "int: " << RES << static_cast<int>('\a') << std::endl;
+		std::cout << std::fixed << std::setprecision(1);
+		std::cout << BYEL << "float: " << RES << static_cast<float>('\a') << "f" << std::endl;
+		std::cout << BYEL << "double: " << RES << static_cast<double>('\a') << std::endl;
+	}
+	else if (literal[1] == 'b'){
+		std::cout << BYEL << "int: " << RES << static_cast<int>('\b') << std::endl;
+		std::cout << std::fixed << std::setprecision(1);
+		std::cout << BYEL << "float: " << RES << static_cast<float>('\b') << "f" << std::endl;
+		std::cout << BYEL << "double: " << RES << static_cast<double>('\b') << std::endl;
+	}
+	else if (literal[1] == 't'){
+		std::cout << BYEL << "int: " << RES << static_cast<int>('\t') << std::endl;
+		std::cout << std::fixed << std::setprecision(1);
+		std::cout << BYEL << "float: " << RES << static_cast<float>('\t') << "f" << std::endl;
+		std::cout << BYEL << "double: " << RES << static_cast<double>('\t') << std::endl;
+	}
+	else if (literal[1] == 'n'){
+		std::cout << BYEL << "int: " << RES << static_cast<int>('\n') << std::endl;
+		std::cout << std::fixed << std::setprecision(1);
+		std::cout << BYEL << "float: " << RES << static_cast<float>('\n') << "f" << std::endl;
+		std::cout << BYEL << "double: " << RES << static_cast<double>('\n') << std::endl;
+	}
+	else if (literal[1] == 'v'){
+		std::cout << BYEL << "int: " << RES << static_cast<int>('\v') << std::endl;
+		std::cout << std::fixed << std::setprecision(1);
+		std::cout << BYEL << "float: " << RES << static_cast<float>('\v') << "f" << std::endl;
+		std::cout << BYEL << "double: " << RES << static_cast<double>('\v') << std::endl;
+	}
+	else if (literal[1] == 'f'){
+		std::cout << BYEL << "int: " << RES << static_cast<int>('\f') << std::endl;
+		std::cout << std::fixed << std::setprecision(1);
+		std::cout << BYEL << "float: " << RES << static_cast<float>('\f') << "f" << std::endl;
+		std::cout << BYEL << "double: " << RES << static_cast<double>('\f') << std::endl;
+	}
+	else if (literal[1] == 'r'){
+		std::cout << BYEL << "int: " << RES << static_cast<int>('\r') << std::endl;
+		std::cout << std::fixed << std::setprecision(1);
+		std::cout << BYEL << "float: " << RES << static_cast<float>('\r') << "f" << std::endl;
+		std::cout << BYEL << "double: " << RES << static_cast<double>('\r') << std::endl;
+	}
+}
+
+static void convFromChar(std::string literal){
+	if (literal.length() == 1){
+		char c = literal[0];
+		if(std::isprint(c))
+        	std::cout << BYEL << "char: " << RES << "'" << c << "'" << std::endl;
+    	else
+			std::cout << BYEL << "char: " << RES << "Non displayable" << std::endl;
+		
+		std::cout << BYEL << "int: " << RES << static_cast<int>(c) << std::endl;
+		std::cout << std::fixed << std::setprecision(1);
+		std::cout << BYEL << "float: " << RES << static_cast<float>(c) << "f" << std::endl;
+		std::cout << BYEL << "double: " << RES << static_cast<double>(c) << std::endl;
+	}
+	else if (literal.length() == 2){
+		whiteSpaces(literal);
+	}
 }
 
 static void convFromInt(int nb){
@@ -137,7 +197,7 @@ static void convFromFloatOrDouble(double nb){
     }
     
     //int - check if infinit or not normal + check max && min
-    if (std::isinf(nb) || std:: isnan(nb) || nb <= static_cast<double>(INT_MIN)  || nb >= static_cast<double>(INTMAX_MAX))
+    if (std::isinf(nb) || std::isnan(nb) || nb <= static_cast<double>(INT_MIN)  || nb >= static_cast<double>(INT_MAX))
         std::cout <<  BYEL << "int: " << RES << "impossible" << std::endl;
     else
         std::cout << BYEL << "int: " << RES << static_cast<int>(nb) << std::endl;
@@ -152,7 +212,7 @@ static void convFromFloatOrDouble(double nb){
 
 void ScalarConverter::convert(const std::string& literal){
     if (isChar(literal))
-        convFromChar(literal[0]);
+        convFromChar(literal);
     else if (isInt(literal)){
         int nb = std::atoi(literal.c_str());
         convFromInt(nb);

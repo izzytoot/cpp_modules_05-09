@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScalarConverter.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isabeltootill <isabeltootill@student.42    +#+  +:+       +#+        */
+/*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 14:57:36 by isabeltooti       #+#    #+#             */
-/*   Updated: 2025/09/12 15:51:30 by isabeltooti      ###   ########.fr       */
+/*   Updated: 2025/09/17 15:09:11 by icunha-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <iomanip>
 #include <iostream>
 #include <string>
-#include <limits>
+#include <climits>
 #include <cstdlib>
 #include <cmath>
 

@@ -3,20 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   Base.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isabeltootill <isabeltootill@student.42    +#+  +:+       +#+        */
+/*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 11:32:13 by isabeltooti       #+#    #+#             */
-/*   Updated: 2025/09/16 12:28:03 by isabeltooti      ###   ########.fr       */
+/*   Updated: 2025/09/17 15:22:07 by icunha-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include <iomanip>
 #include <string>
 #include <iostream>
 #include <cstdlib>
-#include <ctime>
+#include <typeinfo>
 
 #define RED "\033[0;31m"
 #define GRN "\033[0;32m"  
