@@ -6,7 +6,7 @@
 /*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 14:57:36 by isabeltooti       #+#    #+#             */
-/*   Updated: 2025/09/17 15:09:11 by icunha-t         ###   ########.fr       */
+/*   Updated: 2025/09/18 11:13:46 by icunha-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <iostream>
 #include <string>
 #include <climits>
+#include <limits>
 #include <cstdlib>
 #include <cmath>
 

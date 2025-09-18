@@ -6,7 +6,7 @@
 /*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 15:33:54 by isabeltooti       #+#    #+#             */
-/*   Updated: 2025/09/17 16:20:27 by icunha-t         ###   ########.fr       */
+/*   Updated: 2025/09/18 11:20:24 by icunha-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ ScalarConverter::ScalarConverter(const ScalarConverter& src){
               << "ScalarConverter was copied and constructed" 
               << RES << std::endl;
 }
-strtol
 ScalarConverter::~ScalarConverter(){
 	std::cout << BRED 
               << "ScalarConverter was destroyed" 
@@ -91,7 +90,7 @@ static bool isDouble(const std::string& literal){
     return false;
 }
 
-static void whiteSpaces(std::string literal){
+static void whiteSpaces(std::string literal){ //we don't need this as long as we use $ when calling the whitespace
 	std::cout << BYEL << "char: " << RES << "Non displayable" << std::endl;
 	if (literal[1] == '0'){
 		std::cout << BYEL << "int: " << RES << static_cast<int>('\0') << std::endl;
@@ -177,10 +176,8 @@ static void convFromInt(int nb){
 }
 
 static void convFromFloatOrDouble(double nb){
-    //char
-    
     // check exceptions char
-    if (std::isnan(static_cast<float>(nb)) || std::isinf(static_cast<float>(nb)))
+    if (std::isnan(nb) || std::isinf(nb))
         std::cout << BYEL << "char: " << RES << "impossible" << std::endl;
     //conv db to int + convert int to char
     else{
@@ -202,11 +199,9 @@ static void convFromFloatOrDouble(double nb){
     else
         std::cout << BYEL << "int: " << RES << static_cast<int>(nb) << std::endl;
         
-    //float
     std::cout << std::fixed << std::setprecision(1);
-    std::cout << BYEL << "float: " << RES << static_cast<float>(nb) << "f" << std::endl;
+    // std::cout << BYEL << "float: " << RES << static_cast<float>(nb) << "f" << std::endl;
     
-    //double
     std::cout << BYEL << "double: " << RES << nb << std::endl;
 }
 
