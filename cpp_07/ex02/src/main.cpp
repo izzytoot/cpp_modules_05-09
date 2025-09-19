@@ -2,6 +2,25 @@
 
 #define MAX_VAL 5
 
+class Awesome {
+public:
+    Awesome(int n = 0) : _n(n) {}
+    Awesome(const Awesome& other) { _n = other._n; }
+    Awesome& operator=(const Awesome& rhs) {
+        _n = rhs._n;
+        return *this;
+    }
+    int getN() const { return _n; }
+
+private:
+    int _n;
+};
+
+std::ostream& operator<<(std::ostream& o, Awesome const& a) {
+    o << a.getN();
+    return o;
+}
+
 int main(){
 	std::cout << std::endl << BCYA << "********* TEST 1 - EMPTY ARRAY *********" << RES << std::endl;
 
@@ -95,17 +114,21 @@ int main(){
 	}
 	std::cout << std::endl;
 
+	std::cout << std::endl << BCYA << "********* TEST 6 - COMPLEX TYPES *********" << RES << std::endl;
+
+    Array<Awesome> awesomeArray(3);
+    for (unsigned int i = 0; i < awesomeArray.size(); i++)
+        awesomeArray[i] = Awesome(i + 1);
+    for (unsigned int i = 0; i < awesomeArray.size(); i++)
+        std::cout << awesomeArray[i] << " ";  // Uses operator<<
+    std::cout << std::endl;
+
+    return 0;
 	return 0;
 }
 
 // int main(int, char**)
-// {
-//     Array<int> numbers(MAX_VAL);
-//     int* mirror = new int[MAX_VAL];
-//     srand(time(NULL));
-//     for (int i = 0; i < MAX_VAL; i++)
-//     {
-//         const int value = rand();
+// {/ Assign objects   const int value = rand();
 //         numbers[i] = value;
 // 		std::cout << "numbers[i]: " << numbers[i] << std::endl;
 //         mirror[i] = value;

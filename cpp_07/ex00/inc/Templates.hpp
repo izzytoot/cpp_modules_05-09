@@ -6,7 +6,7 @@
 /*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 11:26:14 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/09/18 12:58:40 by icunha-t         ###   ########.fr       */
+/*   Updated: 2025/09/19 15:30:40 by icunha-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@
 
 // we're saying this is not a normal function - it's a template. 
 // In a template, the types are not yet decided - they'll only be define when being used
-template <typename T> void swap(T& x, T& y){
+template <typename T> 
+void swap(T& x, T& y){
 	T tmp = x;
 	x = y;
 	y = tmp;
