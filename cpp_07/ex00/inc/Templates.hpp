@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScalarConverter.hpp                                :+:      :+:    :+:   */
+/*   Templates.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/12 14:57:36 by isabeltooti       #+#    #+#             */
-/*   Updated: 2025/09/18 11:13:46 by icunha-t         ###   ########.fr       */
+/*   Created: 2025/09/18 11:26:14 by icunha-t          #+#    #+#             */
+/*   Updated: 2025/09/19 15:30:40 by icunha-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#pragma once 
 
 #include <iomanip>
-#include <iostream>
 #include <string>
-#include <climits>
-#include <limits>
-#include <cstdlib>
-#include <cmath>
+#include <iostream>
 
 #define RED "\033[0;31m"
 #define GRN "\033[0;32m"  
@@ -30,13 +26,21 @@
 #define BCYA "\033[36;1m"
 #define RES "\033[0m"
 
-class ScalarConverter{
-    private: //so ScalarConverter can't be instantiated
-        ScalarConverter();
-        ScalarConverter(const ScalarConverter& src);
-        ScalarConverter& operator= (const ScalarConverter& src);
-        ~ScalarConverter();
-        
-    public:
-        static void convert(const std::string& literal);
-};
+// we're saying this is not a normal function - it's a template. 
+// In a template, the types are not yet decided - they'll only be define when being used
+template <typename T> 
+void swap(T& x, T& y){
+	T tmp = x;
+	x = y;
+	y = tmp;
+}
+
+template <typename T>
+const T& min(const T& x, const T& y){
+	return (x < y ? x : y);
+}
+
+template <typename T>
+const T& max(const T& x, const T& y){
+	return (x > y ? x : y);
+}

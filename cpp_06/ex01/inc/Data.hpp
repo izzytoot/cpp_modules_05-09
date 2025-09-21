@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   Data.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isabeltootill <isabeltootill@student.42    +#+  +:+       +#+        */
+/*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 15:05:08 by isabeltooti       #+#    #+#             */
-/*   Updated: 2025/09/15 20:10:51 by isabeltooti      ###   ########.fr       */
+/*   Updated: 2025/09/17 15:17:59 by icunha-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include <iomanip>
 #include <string>
 #include <iostream>
 

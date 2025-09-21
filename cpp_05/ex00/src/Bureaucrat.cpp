@@ -6,7 +6,11 @@
 /*   By: isabeltootill <isabeltootill@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 13:44:26 by icunha-t          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/09/12 15:34:12 by isabeltooti      ###   ########.fr       */
+=======
+/*   Updated: 2025/09/18 15:18:57 by icunha-t         ###   ########.fr       */
+>>>>>>> refs/remotes/origin/main
 /*                                                                            */
 /* ************************************************************************** */
 

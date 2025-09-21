@@ -3,22 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   Serializer.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isabeltootill <isabeltootill@student.42    +#+  +:+       +#+        */
+/*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 14:49:00 by isabeltooti       #+#    #+#             */
-/*   Updated: 2025/09/15 15:16:41 by isabeltooti      ###   ########.fr       */
+/*   Updated: 2025/09/17 15:17:34 by icunha-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include <iomanip>
-#include <iostream>
-#include <string>
-#include <limits>
-#include <cstdlib>
-#include <cmath>
 #include "Data.hpp"
+#include <stdint.h>
 
 #define RED "\033[0;31m"
 #define GRN "\033[0;32m"  

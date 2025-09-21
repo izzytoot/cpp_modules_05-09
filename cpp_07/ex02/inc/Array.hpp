@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScalarConverter.hpp                                :+:      :+:    :+:   */
+/*   Array.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/12 14:57:36 by isabeltooti       #+#    #+#             */
-/*   Updated: 2025/09/18 11:13:46 by icunha-t         ###   ########.fr       */
+/*   Created: 2025/09/18 15:12:59 by icunha-t          #+#    #+#             */
+/*   Updated: 2025/09/18 17:47:18 by icunha-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,8 @@
 
 #include <iomanip>
 #include <iostream>
-#include <string>
-#include <climits>
-#include <limits>
 #include <cstdlib>
-#include <cmath>
+#include <stdexcept>
 
 #define RED "\033[0;31m"
 #define GRN "\033[0;32m"  
@@ -30,13 +27,24 @@
 #define BCYA "\033[36;1m"
 #define RES "\033[0m"
 
-class ScalarConverter{
-    private: //so ScalarConverter can't be instantiated
-        ScalarConverter();
-        ScalarConverter(const ScalarConverter& src);
-        ScalarConverter& operator= (const ScalarConverter& src);
-        ~ScalarConverter();
-        
-    public:
-        static void convert(const std::string& literal);
+template <typename T>
+class Array{
+	private:
+		T* _elements;
+		unsigned int _size;
+		
+	public:
+		Array();
+		Array(unsigned int n);
+		Array(const Array& src);
+
+		Array& operator= (const Array& src);
+		T& operator[](unsigned int index);
+		const T& operator[](unsigned int index) const;
+
+		~Array();
+
+		unsigned int size() const;
 };
+
+#include "../src/Array.tpp"

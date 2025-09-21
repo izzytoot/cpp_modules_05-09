@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScalarConverter.hpp                                :+:      :+:    :+:   */
+/*   iter.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/12 14:57:36 by isabeltooti       #+#    #+#             */
-/*   Updated: 2025/09/18 11:13:46 by icunha-t         ###   ########.fr       */
+/*   Created: 2025/09/18 12:59:49 by icunha-t          #+#    #+#             */
+/*   Updated: 2025/09/18 15:13:46 by icunha-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,6 @@
 
 #include <iomanip>
 #include <iostream>
-#include <string>
-#include <climits>
-#include <limits>
-#include <cstdlib>
-#include <cmath>
 
 #define RED "\033[0;31m"
 #define GRN "\033[0;32m"  
@@ -30,13 +25,21 @@
 #define BCYA "\033[36;1m"
 #define RES "\033[0m"
 
-class ScalarConverter{
-    private: //so ScalarConverter can't be instantiated
-        ScalarConverter();
-        ScalarConverter(const ScalarConverter& src);
-        ScalarConverter& operator= (const ScalarConverter& src);
-        ~ScalarConverter();
-        
-    public:
-        static void convert(const std::string& literal);
-};
+void increment(int& x){
+	x++;
+}
+
+void printChar(const char& c){
+	std::cout << c << " ";
+}
+
+template <typename T>
+void printAnyType(const T& element){
+	std::cout << element << " ";
+}
+
+template <typename T, typename F>
+void iter(T* array, std::size_t len, F f){
+	for (int i = 0; static_cast<size_t>(i) < len; i++)
+		f(array[i]);
+}

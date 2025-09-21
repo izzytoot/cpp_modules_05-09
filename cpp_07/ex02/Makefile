@@ -2,7 +2,7 @@
 #                                     CONFIG                                   #
 ################################################################################
 
-NAME = ex07
+NAME = ex02
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -g -std=c++98 -Wshadow -Wno-shadow 
 
@@ -12,7 +12,7 @@ CFLAGS = -Wall -Wextra -Werror -g -std=c++98 -Wshadow -Wno-shadow
 
 INC_DIR = ./inc/
 SRCS_DIR = ./src/
-SRCS = $(addprefix $(SRCS_DIR), )
+SRCS = $(addprefix $(SRCS_DIR), main.cpp )
 TMP = ./tmp
 
 ################################################################################
