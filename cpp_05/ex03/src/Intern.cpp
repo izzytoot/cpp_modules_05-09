@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Intern.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isabeltootill <isabeltootill@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 16:24:43 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/09/11 17:33:56 by icunha-t         ###   ########.fr       */
+/*   Updated: 2025/09/15 09:45:50 by isabeltooti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ Intern::~Intern(){
 /******************************************************************************/
 
 Intern& Intern::operator= (const Intern& src){
-	if (this != &src)
-		*this = src;
+	(void)src;
 	std::cout << BGRN
 			  << "Intern was copied with operator."
 			  << RES << std::endl;
