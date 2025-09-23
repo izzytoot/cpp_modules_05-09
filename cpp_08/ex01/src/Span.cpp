@@ -21,7 +21,7 @@ Span::Span(): _max(0){
 
 Span::Span(unsigned int n){
     for (unsigned int i = 0; i < n; i++)
-        this->_N[i];
+        this->_N.reserve(n);
     this->_max = n;
     //std::cout << GRN << "Span with a maximum of \"" << n << "\" slots constructed." << RES << std::endl;
     return; 
@@ -60,11 +60,18 @@ int& Span::operator[] (unsigned int n){
 /*                              Member Functions                              */
 /******************************************************************************/
 unsigned int Span::getMax() const{
-    return this->_N.size();
+    return this->_max;
 }
 
 int Span::getValue(unsigned int n) const{
-    return this->_N[n];
+    if (_N.size() == 0)
+        return 0;
+    else
+        return this->_N[n];
+}
+
+int Span::getSize() const{
+    return this->_N.size();
 }
 
 void Span::addNumber(int n){
@@ -72,6 +79,15 @@ void Span::addNumber(int n){
         this->_N.push_back(n);
     else
         throw MaxExceeded();
+}
+
+template <typename it>
+void Span::addMultiple(it begining, it end){
+    unsigned int qt = end - begining;
+    if ((this->_N.size() + qt) > this->_max){
+        throw LackSpace();
+    }
+    _N.insert(_N.end(), begining, end);
 }
 
 int Span::shortestSpan(){
@@ -92,16 +108,17 @@ int Span::longestSpan(){
         throw MinElements();
     std::vector<int> tmp = this->_N;
     std::sort(tmp.begin(), tmp.end());
-    return (tmp[tmp.size() - 1] - tmp[0]);    
+    return (tmp[tmp.size() - 1] - tmp[0]);
 }
 
-
-const char* Span::MaxExceeded::what() const throw()
-{
-    return "\033[0;31mError! Cannot add number - _N has reached maximum number of elements.\n\033[0m";
+const char* Span::MaxExceeded::what() const throw(){
+    return "\033[0;31mError! Unable to add number: _N has reached maximum number of elements.\n\033[0m";
 }
 
-const char* Span::MinElements::what() const throw()
-{
-    return "\033[0;31mError! Cannot calculate span - _N contains less than 2 elements.\n\033[0m";
+const char* Span::MinElements::what() const throw(){
+    return "\033[0;31mError! Unable to calculate span: _N contains less than 2 elements.\n\033[0m";
+}
+
+const char* Span::LackSpace::what() const throw(){
+    return "\033[0;31mError! Unable to add multiple numbers: _N doesn't have enough space.\n\033[0m";
 }

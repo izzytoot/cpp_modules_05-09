@@ -14,6 +14,7 @@
 #include <iostream>
 #include <vector>
 #include <exception>
+#include <algorithm>
 
 #define RED "\033[0;31m"
 #define GRN "\033[0;32m"  
@@ -42,16 +43,24 @@ class Span{
         
         unsigned int getMax() const;
         int getValue(unsigned int n) const;
+        int getSize() const;
         
         void addNumber(int n);
         int shortestSpan();
         int longestSpan();
-
+        
+        template<typename it>
+        void addMultiple(it begining, it end);
+        
         class MaxExceeded : public std::exception{
             virtual const char* what() const throw();
         };
 
         class MinElements : public std::exception{
+            virtual const char* what() const throw();
+        };
+
+        class LackSpace : public std::exception{
             virtual const char* what() const throw();
         };
 };
