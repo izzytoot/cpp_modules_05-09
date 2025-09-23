@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isabeltootill <isabeltootill@student.42    +#+  +:+       +#+        */
+/*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 17:24:02 by isabeltooti       #+#    #+#             */
-/*   Updated: 2025/09/22 17:50:38 by isabeltooti      ###   ########.fr       */
+/*   Updated: 2025/09/23 19:20:01 by icunha-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int main()
     sp1.addNumber(9);
     sp1.addNumber(11);
 
+    // std::cout << sp1.getValue(5) << " "; //CHECK INVALID READ HERE
     std::cout << "Container 1 contains the following numbers: ";
     for (int i = 0; i < 5; i++)
         std::cout << sp1.getValue(i) << " ";

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Span.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isabeltootill <isabeltootill@student.42    +#+  +:+       +#+        */
+/*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:55:47 by isabeltooti       #+#    #+#             */
-/*   Updated: 2025/09/22 17:54:43 by isabeltooti      ###   ########.fr       */
+/*   Updated: 2025/09/23 19:18:52 by icunha-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ class Span{
         Span(const Span& src);
 
         Span& operator= (const Span& src);
-        int& operator[] (unsigned int n);
         
         ~Span();
         
@@ -48,10 +47,11 @@ class Span{
         unsigned int getSize() const;
         
         void addNumber(int n);
-        template<typename it>
-        void addMultiple(it start, it end);
         int shortestSpan();
         int longestSpan();
+        
+        template<typename it>
+        void addMultiple(it start, it end);
         
         class MaxExceeded : public std::exception{
             virtual const char* what() const throw();

@@ -6,7 +6,7 @@
 /*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 14:28:42 by isabeltooti       #+#    #+#             */
-/*   Updated: 2025/09/23 13:49:10 by icunha-t         ###   ########.fr       */
+/*   Updated: 2025/09/23 19:05:30 by icunha-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@
 
 template <typename T>
 void easyfind(T& container, int n){
-    //typename before so the compiler knows T::const_iterator is a type, and i is a variable of that type.
+    //typename before so the compiler knows T::iterator is a type, and i is a variable of that type.
     //std::find returns the first found or last if not found
-   typename T::iterator i = std::find(container.begin(), container.end(), n);
+   typename T::iterator it = std::find(container.begin(), container.end(), n);
 
-    if (i == container.end()){
+    if (it == container.end()){
         std::ostringstream os;
         os << RED << "Couldn't find \"" << n << "\" in the container.\n" << RES;
         throw std::runtime_error(os.str());
@@ -45,11 +45,9 @@ void easyfind(T& container, int n){
 
 template <typename T>
 void easyfind(const T& container, int n){
-    //typename before so the compiler knows T::const_iterator is a type, and i is a variable of that type.
-    //std::find returns the first found or last if not found
-   typename T::const_iterator i = std::find(container.begin(), container.end(), n);
+   typename T::const_iterator it = std::find(container.begin(), container.end(), n);
 
-    if (i == container.end()){
+    if (it == container.end()){
         std::ostringstream os;
         os << RED << "Couldn't find \"" << n << "\" in the container.\n" << RES;
         throw std::runtime_error(os.str());

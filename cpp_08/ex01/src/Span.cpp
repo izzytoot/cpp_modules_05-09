@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Span.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isabeltootill <isabeltootill@student.42    +#+  +:+       +#+        */
+/*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 16:05:04 by isabeltooti       #+#    #+#             */
-/*   Updated: 2025/09/22 17:56:49 by isabeltooti      ###   ########.fr       */
+/*   Updated: 2025/09/23 19:18:45 by icunha-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,6 @@ Span& Span::operator= (const Span& src){
     return *this;
 }
 
-int& Span::operator[] (unsigned int n){
-	if (n >= _N.size() - 1)
-		std::cerr << RES << "Error! Impossible to get requested number." << RES << std::endl;
-	return this->_N[n];
-}
 /******************************************************************************/
 /*                              Member Functions                              */
 /******************************************************************************/
@@ -66,8 +61,11 @@ unsigned int Span::getMax() const{
 int Span::getValue(unsigned int n) const{
     if (_N.size() == 0)
         return 0;
-    else
+    else{
+        if (n >= _N.size())
+		    std::cerr << RED << "Error! Impossible to get requested number." << RES << std::endl;
         return this->_N[n];
+    }
 }
 
 unsigned int Span::getSize() const{
