@@ -43,7 +43,7 @@ class Span{
         
         unsigned int getMax() const;
         int getValue(unsigned int n) const;
-        int getSize() const;
+        unsigned int getSize() const;
         
         void addNumber(int n);
         int shortestSpan();

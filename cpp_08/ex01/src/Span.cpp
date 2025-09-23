@@ -70,7 +70,7 @@ int Span::getValue(unsigned int n) const{
         return this->_N[n];
 }
 
-int Span::getSize() const{
+unsigned int Span::getSize() const{
     return this->_N.size();
 }
 

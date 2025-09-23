@@ -109,5 +109,38 @@ int main()
         std::cerr << e.what();
     }
 
+    std::cout << std::endl << BCYA << "****** CREATING  CONTAINER WITH 10 SPACES AND ADD 5 VALUES ******" << RES << std::endl;   
+    Span sp4 = Span(10);
+    for (int i = 0; i < 5; i++){
+        sp4.addNumber(i + 1);
+    }
+
+    std::cout << "Container 4 contains the following numbers: ";
+    for (unsigned int i = 0; i < 5; i++)
+        std::cout << sp4.getValue(i) << " ";
+    std::cout << std::endl;
+
+    std::cout << std::endl << BCYA << "* ADD ANOTHER 5 WITH ADDMULTIPLE*" << RES << std::endl;   
+    sp4.addMultiple(6, 10);
+
+    std::cout << "Container 4 now contains the following numbers: ";
+    for (unsigned int i = 0; i < sp4.getSize(); i++)
+        std::cout << sp4.getValue(i) << " ";
+    std::cout << std::endl;
+
+    std::cout << std::endl << BCYA << "* TEST 1 - GET LONGEST SPAN *" << RES << std::endl;   
+    try{
+        std::cout << BYEL << "Longest span: " << RES << sp4.longestSpan() <<  std::endl;
+    }catch (std::exception& e){
+        std::cerr << e.what();
+    }
+
+    std::cout << std::endl << BCYA << "* TEST 2 - GET SHORTEST SPAN *" << RES << std::endl;   
+    try{
+        std::cout << BYEL << "Shortest span: " << RES << sp4.shortestSpan() <<  std::endl;
+    }catch (std::exception& e){
+        std::cerr << e.what();
+    }
+
     return 0;
 }
