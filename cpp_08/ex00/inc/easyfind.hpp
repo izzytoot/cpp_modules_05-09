@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   easyfind.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isabeltootill <isabeltootill@student.42    +#+  +:+       +#+        */
+/*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 14:28:42 by isabeltooti       #+#    #+#             */
-/*   Updated: 2025/09/21 17:22:58 by isabeltooti      ###   ########.fr       */
+/*   Updated: 2025/09/23 13:49:10 by icunha-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
