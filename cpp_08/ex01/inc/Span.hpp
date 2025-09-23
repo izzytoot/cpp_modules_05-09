@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma once
+
 #include <iomanip>
 #include <iostream>
 #include <vector>
@@ -46,11 +48,10 @@ class Span{
         unsigned int getSize() const;
         
         void addNumber(int n);
+        template<typename it>
+        void addMultiple(it start, it end);
         int shortestSpan();
         int longestSpan();
-        
-        template<typename it>
-        void addMultiple(it begining, it end);
         
         class MaxExceeded : public std::exception{
             virtual const char* what() const throw();
@@ -64,3 +65,5 @@ class Span{
             virtual const char* what() const throw();
         };
 };
+
+#include "../src/Span.tpp"

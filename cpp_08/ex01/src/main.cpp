@@ -120,8 +120,11 @@ int main()
         std::cout << sp4.getValue(i) << " ";
     std::cout << std::endl;
 
-    std::cout << std::endl << BCYA << "* ADD ANOTHER 5 WITH ADDMULTIPLE*" << RES << std::endl;   
-    sp4.addMultiple(6, 10);
+    std::cout << std::endl << BCYA << "* ADD ANOTHER 5 WITH ADDMULTIPLE *" << RES << std::endl;
+    std::vector<int> vec;
+    for (int i = 6; i <= 10; i++)
+        vec.push_back(i);
+    sp4.addMultiple(vec.begin(), vec.end());
 
     std::cout << "Container 4 now contains the following numbers: ";
     for (unsigned int i = 0; i < sp4.getSize(); i++)

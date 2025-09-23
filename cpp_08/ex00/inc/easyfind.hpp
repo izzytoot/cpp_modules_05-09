@@ -16,6 +16,7 @@
 #include <iostream>
 #include <algorithm>
 #include <stdexcept>
+#include <sstream>
 
 #define RED "\033[0;31m"
 #define GRN "\033[0;32m"  
@@ -33,8 +34,11 @@ void easyfind(T& container, int n){
     //std::find returns the first found or last if not found
    typename T::iterator i = std::find(container.begin(), container.end(), n);
 
-    if (i == container.end())
-        throw std::runtime_error(std::string(RED) + "Couldn't find \"" + std::to_string(n) + "\" in the container.\n" + RES);
+    if (i == container.end()){
+        std::ostringstream os;
+        os << RED << "Couldn't find \"" << n << "\" in the container.\n" << RES;
+        throw std::runtime_error(os.str());
+    }
     else
         std::cout << GRN << "Found \"" << n << "\" in the container." << RES << std::endl;
 }
@@ -45,8 +49,11 @@ void easyfind(const T& container, int n){
     //std::find returns the first found or last if not found
    typename T::const_iterator i = std::find(container.begin(), container.end(), n);
 
-    if (i == container.end())
-        throw std::runtime_error(std::string(RED) + "Couldn't find \"" + std::to_string(n) + "\" in the container.\n" + RES);
+    if (i == container.end()){
+        std::ostringstream os;
+        os << RED << "Couldn't find \"" << n << "\" in the container.\n" << RES;
+        throw std::runtime_error(os.str());
+    }
     else
         std::cout << GRN << "Found \"" << n << "\" in the container." << RES << std::endl;
 }

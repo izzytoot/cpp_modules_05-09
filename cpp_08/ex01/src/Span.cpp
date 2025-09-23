@@ -81,15 +81,6 @@ void Span::addNumber(int n){
         throw MaxExceeded();
 }
 
-template <typename it>
-void Span::addMultiple(it begining, it end){
-    unsigned int qt = end - begining;
-    if ((this->_N.size() + qt) > this->_max){
-        throw LackSpace();
-    }
-    _N.insert(_N.end(), begining, end);
-}
-
 int Span::shortestSpan(){
     if (this->_N.size() < 2)
         throw MinElements();
