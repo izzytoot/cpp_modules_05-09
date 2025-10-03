@@ -6,7 +6,7 @@
 /*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 17:24:02 by isabeltooti       #+#    #+#             */
-/*   Updated: 2025/09/23 19:20:01 by icunha-t         ###   ########.fr       */
+/*   Updated: 2025/09/24 11:43:47 by icunha-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int main()
         std::cerr << e.what();
     }
 
-    std::cout << std::endl << BCYA << "****** CREATING  CONTAINER WITH 10 SPACES AND ADD 5 VALUES ******" << RES << std::endl;   
+    std::cout << std::endl << BCYA << "****** CREATING CONTAINER WITH 10 SPACES AND ADD 5 VALUES ******" << RES << std::endl;   
     Span sp4 = Span(10);
     for (int i = 0; i < 5; i++){
         sp4.addNumber(i + 1);
