@@ -30,15 +30,17 @@ float BitcoinExchange::getRate(const std::string& date) const{
 }
 
 bool BitcoinExchange::isValidDate(const std::string& date) {
-
+    if (date.size() != 10 || date[4] != '-' || date[7] != '-')
+        throw std::runtime_error(RED"Error! Bad date format."RES);
 }
 
 bool BitcoinExchange::isValidRate(const std::string& rateStr, float& rateFloat) {
-
+    if (rateFloat < 0)
+        throw std::runtime_error(RED"Error! Invalid rate."RES);
 }
 
-void BitcoinExchange::loadDataBase(const std::string& filename) {
-    std::ifstream database(filename.c_str());
+void BitcoinExchange::loadDataBase(const std::string& dbFile) {
+    std::ifstream database(dbFile.c_str());
 
     if (!database.is_open())
         throw std::runtime_error(RED"Error! Couldn't open database file."RES);
@@ -56,11 +58,11 @@ void BitcoinExchange::loadDataBase(const std::string& filename) {
         std::string dateStr = trimString(line.substr(0, commaPos));
         std::string rateStr = trimString(line.substr(commaPos + 1));
         
-        if (!isValidDate(dateStr))
+        if (dateStr.size() != 10 || dateStr[4] != '-' || dateStr[7] != '-')
             throw std::runtime_error(RED"Error! Invalid date found in database."RES);
         
         float rateFloat = std::stof(rateStr);
-        if (!isValidRate(rateStr, rateFloat))
+        if (rateFloat < 0)
             throw std::runtime_error(RED"Error! Invalid rate found in database."RES);
   
         _db[dateStr] = rateFloat;
@@ -76,6 +78,6 @@ std::string BitcoinExchange::trimString(std::string str) const{
     return str.substr(first, (last - first + 1));
 }
 
-bool BitcoinExchange::parseInput(std::string fname) {
-
+bool BitcoinExchange::parseInput(std::string inputFile) {
+    std::ifstream input(inputFile.c_str()); //HERE
 }

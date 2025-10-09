@@ -44,6 +44,6 @@ class BitcoinExchange{
         BitcoinExchange& operator= (const BitcoinExchange& src);
         ~BitcoinExchange();
 
-        void loadDataBase(const std::string& filename);
-        bool parseInput(std::string fname);
+        void loadDataBase(const std::string& dbFile);//done
+        bool parseInput(std::string inputFile);
 };
