@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isabeltootill <isabeltootill@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:39:14 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/10/03 12:40:00 by icunha-t         ###   ########.fr       */
+/*   Updated: 2025/10/16 00:16:24 by isabeltooti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,6 @@ BitcoinExchange::~BitcoinExchange() {}
 
 float BitcoinExchange::getRate(const std::string& date) const{
 
-}
-
-bool BitcoinExchange::isValidDate(const std::string& date) {
-    if (date.size() != 10 || date[4] != '-' || date[7] != '-')
-        throw std::runtime_error(RED"Error! Bad date format."RES);
-}
-
-bool BitcoinExchange::isValidRate(const std::string& rateStr, float& rateFloat) {
-    if (rateFloat < 0)
-        throw std::runtime_error(RED"Error! Invalid rate."RES);
 }
 
 void BitcoinExchange::loadDataBase(const std::string& dbFile) {
@@ -67,7 +57,7 @@ void BitcoinExchange::loadDataBase(const std::string& dbFile) {
   
         _db[dateStr] = rateFloat;
     }
-    database.close();
+    database.close();    
 }
 
 std::string BitcoinExchange::trimString(std::string str) const{
@@ -79,5 +69,51 @@ std::string BitcoinExchange::trimString(std::string str) const{
 }
 
 bool BitcoinExchange::parseInput(std::string inputFile) {
-    std::ifstream input(inputFile.c_str()); //HERE
+    std::ifstream input(inputFile.c_str());
+    
+    if (!input.is_open())
+        throw std::runtime_error(RED"Error! Couldn't open input file."RES);
+    
+    std::string line;
+    std::getline(input, line);
+    if (line != "date | value")
+        throw std::runtime_error(RED"Error! Input file should start with \"date | value\"."RES);
+    line.clear();
+    while (std::getline(input, line)){
+        size_t spPos1 = line.find(' ');
+        size_t slashPos = line.find('|');
+        size_t spPos2 = line.find(' ', spPos1 + 2);
+        
+        if (line.empty() || spPos1 == std::string::npos || slashPos == std::string::npos || spPos2 == std::string::npos || line == "date | value")
+            throw std::runtime_error(RED"Error! Invalid input file."RES);
+
+        else if (line == "date | value")
+            continue;
+            
+        std::string indateStr = trimString(line.substr(0, spPos1));
+        std::string invalueStr = trimString(line.substr(spPos2 + 1));
+        
+        if (!isValidDate(indateStr))
+            throw std::runtime_error(RED"Error! Invalid date found in input file."RES);
+        else if (!isValidRate(invalueStr))
+            throw std::runtime_error(RED"Error! Invalid value found in input file."RES);
+
+        
+    }
+}
+
+
+bool BitcoinExchange::isValidDate(const std::string& date) {
+    // 1. Format check YYYY-MM-DD (length 10, '-' at 4 and 7)
+    // 2. Year between 2009 and current year (since Bitcoin didn’t exist before 2009)
+    // 3. Month 1–12
+    // 4. Day 1–31 (check depending on month, and leap years)
+    // return true if all ok
+}
+
+bool BitcoinExchange::isValidValue(const std::string& valueStr, float& value) {
+    // Try to convert to float (catch exceptions)
+    // Must be >= 0 and <= 1000
+    // No alphabetic characters
+    // return true if all ok
 }

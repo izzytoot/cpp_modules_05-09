@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isabeltootill <isabeltootill@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:39:21 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/10/03 12:58:16 by icunha-t         ###   ########.fr       */
+/*   Updated: 2025/10/16 00:15:38 by isabeltooti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ class BitcoinExchange{
         float getRate(const std::string& date) const;
         std::string trimString(std::string str) const;
         bool isValidDate(const std::string& date);
-        bool isValidRate(const std::string& rateStr, float& rateFloat);
+        bool isValidRate(const std::string& rateStr);
 
     public:
         BitcoinExchange();

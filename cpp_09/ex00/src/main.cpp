@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: icunha-t <icunha-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isabeltootill <isabeltootill@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:38:49 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/10/03 12:48:02 by icunha-t         ###   ########.fr       */
+/*   Updated: 2025/10/15 23:45:29 by isabeltooti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ int main(int ac, char **av){
     BitcoinExchange exchange;
     try{
         exchange.loadDataBase("../files/data.csv");
+        exchange.parseInput("../files/input.txt");
     }catch(std::exception& e){
         e.what();
     }
+
+    
 }
