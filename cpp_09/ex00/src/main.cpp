@@ -6,7 +6,7 @@
 /*   By: isabeltootill <isabeltootill@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:38:49 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/10/15 23:45:29 by isabeltooti      ###   ########.fr       */
+/*   Updated: 2025/10/16 23:27:26 by isabeltooti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int main(int ac, char **av){
     if (ac != 2){
-        std::cerr << "Error. Usage: ./btc <inputfile.txt>";
+        std::cerr << RED << "Error. Usage: ./btc <inputfile.txt>" << RES << std::endl;
         return 1;
     }
     
@@ -23,7 +23,7 @@ int main(int ac, char **av){
         exchange.loadDataBase("files/data.csv");
         exchange.convert(av[1]);
     }catch(std::exception& e){
-        std::cout << e.what();
+        std::cout << e.what() << std::endl;;
     }
 
     return 0;

@@ -6,7 +6,7 @@
 /*   By: isabeltootill <isabeltootill@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:39:14 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/10/16 23:24:37 by isabeltooti      ###   ########.fr       */
+/*   Updated: 2025/10/16 23:38:13 by isabeltooti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void BitcoinExchange::convert(std::string inputFile) {
         }
 
         if (line == "date | value" || spPos1 == std::string::npos || slashPos == std::string::npos || spPos2 == std::string::npos || line == "date | value"){
-            std::cerr << "Bad input => " << line << std::endl;
+            std::cerr << RED << "Error: bad input => " << RES << line << std::endl;
             continue;
         } 
         std::string inDateStr = trimString(line.substr(0, spPos1));
@@ -98,14 +98,14 @@ void BitcoinExchange::convert(std::string inputFile) {
         float value = toFloat(inValueStr);
         float result = value * rate;
 
-        std::cout << inDateStr << " => " << inValueStr << " = " << result <<std::endl;
+        std::cout << GRN << inDateStr << " => " << inValueStr << " = " << RES << result << std::endl;
     }
 }
 
 bool BitcoinExchange::isValidDate(const std::string& dateStr) {
 
     if (dateStr.length() != 10 || dateStr[4] != '-' || dateStr[7] != '-'){
-        std::cerr << "Error: bad input => " << dateStr << std::endl;
+        std::cerr << RED << "Error: bad input => " << RES << dateStr << std::endl;
         return false;
     }
     
@@ -114,7 +114,7 @@ bool BitcoinExchange::isValidDate(const std::string& dateStr) {
             continue;
             
         if (!isdigit((dateStr[i]))){
-            std::cout << "Error: bad input => " << dateStr << std::endl;
+            std::cerr << RED << "Error: bad input => " << RES << dateStr << std::endl;
             return false;   
         }
     }
@@ -124,31 +124,31 @@ bool BitcoinExchange::isValidDate(const std::string& dateStr) {
     int day = toInt(dateStr.substr(8, 2));
     
     if (year < 2009 || year > 2025){
-        std::cerr << "Error: bad input => no information for year " << year << std::endl;
+        std::cerr << RED << "Error: bad input => " << RES << "no information for year " << year << std::endl;
         return false;
     }
     else if (year < 0){
-        std::cerr << "Error: bad input => " << dateStr << std::endl;
+        std::cerr << RED << "Error: bad input => " << RES << dateStr << std::endl;
         return false;
     }
     else if (month < 1 || month > 12){
-        std::cerr << "Error: bad input => " << dateStr << std::endl;
+        std::cerr << RED << "Error: bad input => " << RES << dateStr << std::endl;
         return false;
     }
     else if (day < 1 || day > 31){
-        std::cerr << "Error: bad input => " << dateStr << std::endl;
+        std::cerr << RED << "Error: bad input => " << RES << dateStr << std::endl;
         return false;
     }
     else if ((month == 4 || month == 6 || month == 9 || month == 11 || month == 12) && day > 30){
-        std::cerr << "Error: bad input => " << dateStr << std::endl;
+        std::cerr << RED << "Error: bad input => " << RES << dateStr << std::endl;
         return false;
     }
     else if (month == 2 && (year % 4 == 0) && day > 29){
-        std::cerr << "Error: bad input => " << dateStr << std::endl;
+        std::cerr << RED << "Error: bad input => " << RES << dateStr << std::endl;
         return false;
     }
     else if (month == 2 && (year % 4 != 0) && day > 28){
-        std::cerr << "Error: bad input => " << dateStr << std::endl;
+        std::cerr << RED << "Error: bad input => " << RES << dateStr << std::endl;
         return false;
     }
     
@@ -159,7 +159,7 @@ bool BitcoinExchange::isValidValue(const std::string& valueStr) {
     
     for (size_t i = 0; i < valueStr.size(); i++){
         if ((valueStr[i] != '.' && valueStr[i] != ',')  && !isdigit((valueStr[i]))){
-            std::cout << "Error: bad input => " << valueStr << std::endl;
+            std::cerr << RED << "Error: bad input => " << RES << valueStr << std::endl;
             return false;   
         }
     }
@@ -171,7 +171,7 @@ bool BitcoinExchange::isValidValue(const std::string& valueStr) {
         return false;
     }
     if (flValue > 1000){
-        std::cerr << "Error: too large a number." << std::endl;
+        std::cerr << RED << "Error: too large a number." << RES << std::endl;
         return false;
     }
     return true;
