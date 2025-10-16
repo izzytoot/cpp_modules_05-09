@@ -20,11 +20,11 @@ int main(int ac, char **av){
     
     BitcoinExchange exchange;
     try{
-        exchange.loadDataBase("../files/data.csv");
-        exchange.parseInput("../files/input.txt");
+        exchange.loadDataBase("files/data.csv");
+        exchange.convert(av[1]);
     }catch(std::exception& e){
-        e.what();
+        std::cout << e.what();
     }
 
-    
+    return 0;
 }

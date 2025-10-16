@@ -19,6 +19,7 @@
 #include <sstream>
 #include <fstream>
 
+
 #define RED "\033[0;31m"
 #define GRN "\033[0;32m"  
 #define YEL "\033[0;33m"
@@ -35,8 +36,8 @@ class BitcoinExchange{
 
         float getRate(const std::string& date) const;
         std::string trimString(std::string str) const;
-        bool isValidDate(const std::string& date);
-        bool isValidRate(const std::string& rateStr);
+        bool isValidDate(const std::string& dateStr);
+        bool isValidValue(const std::string& valueStr);
 
     public:
         BitcoinExchange();
@@ -45,5 +46,13 @@ class BitcoinExchange{
         ~BitcoinExchange();
 
         void loadDataBase(const std::string& dbFile);//done
-        bool parseInput(std::string inputFile);
+        void convert(std::string inputFile);
+
+    class invalidStrToFloat: public std::exception{
+			public:
+				virtual const char* what() const throw();
+    };
 };
+
+float toFloat(const std::string& str);
+int toInt(const std::string& str);

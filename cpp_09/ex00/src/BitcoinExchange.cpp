@@ -24,11 +24,6 @@ BitcoinExchange& BitcoinExchange::operator= (const BitcoinExchange& src) {
 
 BitcoinExchange::~BitcoinExchange() {}
 
-
-float BitcoinExchange::getRate(const std::string& date) const{
-
-}
-
 void BitcoinExchange::loadDataBase(const std::string& dbFile) {
     std::ifstream database(dbFile.c_str());
 
@@ -50,8 +45,7 @@ void BitcoinExchange::loadDataBase(const std::string& dbFile) {
         
         if (dateStr.size() != 10 || dateStr[4] != '-' || dateStr[7] != '-')
             throw std::runtime_error(RED"Error! Invalid date found in database."RES);
-        
-        float rateFloat = std::stof(rateStr);
+        float rateFloat = toFloat(rateStr);
         if (rateFloat < 0)
             throw std::runtime_error(RED"Error! Invalid rate found in database."RES);
   
@@ -68,7 +62,7 @@ std::string BitcoinExchange::trimString(std::string str) const{
     return str.substr(first, (last - first + 1));
 }
 
-bool BitcoinExchange::parseInput(std::string inputFile) {
+void BitcoinExchange::convert(std::string inputFile) {
     std::ifstream input(inputFile.c_str());
     
     if (!input.is_open())
@@ -84,36 +78,125 @@ bool BitcoinExchange::parseInput(std::string inputFile) {
         size_t slashPos = line.find('|');
         size_t spPos2 = line.find(' ', spPos1 + 2);
         
-        if (line.empty() || spPos1 == std::string::npos || slashPos == std::string::npos || spPos2 == std::string::npos || line == "date | value")
-            throw std::runtime_error(RED"Error! Invalid input file."RES);
-
-        else if (line == "date | value")
+        if (line.empty()){
             continue;
-            
-        std::string indateStr = trimString(line.substr(0, spPos1));
-        std::string invalueStr = trimString(line.substr(spPos2 + 1));
-        
-        if (!isValidDate(indateStr))
-            throw std::runtime_error(RED"Error! Invalid date found in input file."RES);
-        else if (!isValidRate(invalueStr))
-            throw std::runtime_error(RED"Error! Invalid value found in input file."RES);
+        }
 
+        if (line == "date | value" || spPos1 == std::string::npos || slashPos == std::string::npos || spPos2 == std::string::npos || line == "date | value"){
+            std::cerr << "Bad input => " << line << std::endl;
+            continue;
+        } 
+        std::string inDateStr = trimString(line.substr(0, spPos1));
+        std::string inValueStr = trimString(line.substr(spPos2 + 1));
         
+        if (!isValidDate(inDateStr))
+            continue;
+        else if (!isValidValue(inValueStr))
+            continue;
+
+        float rate = getRate(inDateStr);
+        float value = toFloat(inValueStr);
+        float result = value * rate;
+
+        std::cout << inDateStr << " => " << inValueStr << " = " << result <<std::endl;
     }
 }
 
+bool BitcoinExchange::isValidDate(const std::string& dateStr) {
 
-bool BitcoinExchange::isValidDate(const std::string& date) {
-    // 1. Format check YYYY-MM-DD (length 10, '-' at 4 and 7)
-    // 2. Year between 2009 and current year (since Bitcoin didn’t exist before 2009)
-    // 3. Month 1–12
-    // 4. Day 1–31 (check depending on month, and leap years)
-    // return true if all ok
+    if (dateStr.length() != 10 || dateStr[4] != '-' || dateStr[7] != '-'){
+        std::cerr << "Error: bad input => " << dateStr << std::endl;
+        return false;
+    }
+
+    int year = toInt(dateStr.substr(0, 4));
+    int month = toInt(dateStr.substr(5, 2));
+    int day = toInt(dateStr.substr(8, 2));
+
+    // if (!isalnum(year) || !isalnum(month) || !isalnum(day)){
+    //      std::cerr << "Error: bad input => " << dateStr << std::endl;
+    //     return false;
+    // }
+    else if (year < 2009 || year > 2025){
+        std::cerr << "Error: bad input => no information for year " << year << std::endl;
+        return false;
+    }
+    else if (year < 0){
+        std::cerr << "Error: bad input => invalid year: " << dateStr << std::endl;
+        return false;
+    }
+    else if (month < 1 || month > 12){
+        std::cerr << "Error: bad input => invalid month: " << dateStr << std::endl;
+        return false;
+    }
+    else if (day < 1 || day > 31){
+        std::cerr << "Error: bad input => invalid day: " << dateStr << std::endl;
+        return false;
+    }
+    else if ((month == 4 || month == 6 || month == 9 || month == 11 || month == 12) && day > 30){
+        std::cerr << "Error: bad input => invalid day: " << dateStr << std::endl;
+        return false;
+    }
+    else if (month == 2 && (year % 4 == 0) && day > 29){
+        std::cerr << "Error: bad input => invalid day: " << dateStr << std::endl;
+        return false;
+    }
+    else if (month == 2 && (year % 4 != 0) && day > 28){
+        std::cerr << "Error: bad input => invalid day: " << dateStr << std::endl;
+        return false;
+    }
+    
+    return true;
 }
 
-bool BitcoinExchange::isValidValue(const std::string& valueStr, float& value) {
-    // Try to convert to float (catch exceptions)
-    // Must be >= 0 and <= 1000
-    // No alphabetic characters
-    // return true if all ok
+bool BitcoinExchange::isValidValue(const std::string& valueStr) {
+
+    float flValue = toFloat(valueStr);
+    // if (!isalnum(static_cast<int>(flValue))){
+    //      std::cerr << "Error: bad input => " << valueStr << std::endl;
+    //     return false;
+    // }
+    if (flValue < 0){
+        std::cerr << "Error: not a positive number." << std::endl;
+        return false;
+    }
+    if (flValue > 1000){
+        std::cerr << "Error: too large a number." << std::endl;
+        return false;
+    }
+    return true;
+}
+
+float BitcoinExchange::getRate(const std::string& date) const{
+    if (_db.empty())
+        throw std::runtime_error(RED"Error! Database is empty."RES);
+
+    std::map<std::string, float>::const_iterator it = _db.lower_bound(date);
+    
+    if (it != _db.end() && it->first == date)
+        return it->second;
+    
+    if (it == _db.begin())
+        throw std::runtime_error(RED"Error! Date too early: no data available."RES);
+    
+    --it;
+    return it->second;
+}
+
+const char* BitcoinExchange::invalidStrToFloat::what() const throw(){
+	return "Error: Invalid input value => impossible to convert ";
+}
+
+float toFloat(const std::string& str){
+    std::stringstream ss(str);
+    float f;
+    ss >> f;
+    return f;
+}
+
+int toInt(const std::string& str){
+    std::stringstream ss(str);
+    int i;
+    ss >> i;
+    return i;
 }
