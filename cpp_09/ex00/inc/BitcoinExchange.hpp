@@ -6,7 +6,7 @@
 /*   By: isabeltootill <isabeltootill@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:39:21 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/10/16 00:15:38 by isabeltooti      ###   ########.fr       */
+/*   Updated: 2025/10/16 23:03:14 by isabeltooti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 #include <ctime>
 #include <sstream>
 #include <fstream>
-
 
 #define RED "\033[0;31m"
 #define GRN "\033[0;32m"  

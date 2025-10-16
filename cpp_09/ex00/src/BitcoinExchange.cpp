@@ -6,7 +6,7 @@
 /*   By: isabeltootill <isabeltootill@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:39:14 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/10/16 00:16:24 by isabeltooti      ###   ########.fr       */
+/*   Updated: 2025/10/16 23:24:37 by isabeltooti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,41 +108,47 @@ bool BitcoinExchange::isValidDate(const std::string& dateStr) {
         std::cerr << "Error: bad input => " << dateStr << std::endl;
         return false;
     }
+    
+    for (size_t i = 0; i < dateStr.size(); i++){
+        if (i == 4 || i == 7)
+            continue;
+            
+        if (!isdigit((dateStr[i]))){
+            std::cout << "Error: bad input => " << dateStr << std::endl;
+            return false;   
+        }
+    }
 
     int year = toInt(dateStr.substr(0, 4));
     int month = toInt(dateStr.substr(5, 2));
     int day = toInt(dateStr.substr(8, 2));
-
-    // if (!isalnum(year) || !isalnum(month) || !isalnum(day)){
-    //      std::cerr << "Error: bad input => " << dateStr << std::endl;
-    //     return false;
-    // }
-    else if (year < 2009 || year > 2025){
+    
+    if (year < 2009 || year > 2025){
         std::cerr << "Error: bad input => no information for year " << year << std::endl;
         return false;
     }
     else if (year < 0){
-        std::cerr << "Error: bad input => invalid year: " << dateStr << std::endl;
+        std::cerr << "Error: bad input => " << dateStr << std::endl;
         return false;
     }
     else if (month < 1 || month > 12){
-        std::cerr << "Error: bad input => invalid month: " << dateStr << std::endl;
+        std::cerr << "Error: bad input => " << dateStr << std::endl;
         return false;
     }
     else if (day < 1 || day > 31){
-        std::cerr << "Error: bad input => invalid day: " << dateStr << std::endl;
+        std::cerr << "Error: bad input => " << dateStr << std::endl;
         return false;
     }
     else if ((month == 4 || month == 6 || month == 9 || month == 11 || month == 12) && day > 30){
-        std::cerr << "Error: bad input => invalid day: " << dateStr << std::endl;
+        std::cerr << "Error: bad input => " << dateStr << std::endl;
         return false;
     }
     else if (month == 2 && (year % 4 == 0) && day > 29){
-        std::cerr << "Error: bad input => invalid day: " << dateStr << std::endl;
+        std::cerr << "Error: bad input => " << dateStr << std::endl;
         return false;
     }
     else if (month == 2 && (year % 4 != 0) && day > 28){
-        std::cerr << "Error: bad input => invalid day: " << dateStr << std::endl;
+        std::cerr << "Error: bad input => " << dateStr << std::endl;
         return false;
     }
     
@@ -150,12 +156,16 @@ bool BitcoinExchange::isValidDate(const std::string& dateStr) {
 }
 
 bool BitcoinExchange::isValidValue(const std::string& valueStr) {
-
+    
+    for (size_t i = 0; i < valueStr.size(); i++){
+        if ((valueStr[i] != '.' && valueStr[i] != ',')  && !isdigit((valueStr[i]))){
+            std::cout << "Error: bad input => " << valueStr << std::endl;
+            return false;   
+        }
+    }
+    
     float flValue = toFloat(valueStr);
-    // if (!isalnum(static_cast<int>(flValue))){
-    //      std::cerr << "Error: bad input => " << valueStr << std::endl;
-    //     return false;
-    // }
+    
     if (flValue < 0){
         std::cerr << "Error: not a positive number." << std::endl;
         return false;
