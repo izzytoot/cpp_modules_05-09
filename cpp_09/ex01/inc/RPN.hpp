@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   BitcoinExchange.hpp                                :+:      :+:    :+:   */
+/*   RPN.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isabeltootill <isabeltootill@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:39:21 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/10/16 23:03:14 by isabeltooti      ###   ########.fr       */
+/*   Updated: 2025/10/18 11:39:13 by isabeltooti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <iostream>
 #include <iomanip>
 #include <stack>
+#include <exception>
 
 #define RED "\033[0;31m"
 #define GRN "\033[0;32m"  
@@ -30,14 +31,16 @@ class RPN {
     private:
         std::string _input;
         std::stack<int> _stack;
-
-    public:
         RPN();
+        
+        int doTheMath(char op);
+        
+    public:
+        RPN(std::string input);
         RPN(const RPN& src);
         const RPN& operator= (const RPN& src);
         ~RPN();
 
-        void loadStack(std::string input);
-        std::string get_result();
-        
+        void performOperation();
+        int getResult();   
 };

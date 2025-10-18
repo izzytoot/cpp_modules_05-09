@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   BitcoinExchange.hpp                                :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isabeltootill <isabeltootill@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:39:21 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/10/16 23:03:14 by isabeltooti      ###   ########.fr       */
+/*   Updated: 2025/10/18 11:39:41 by isabeltooti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,15 @@ int main (int ac, char** av){
         return 1;
     }
 
-    RPN expression;
-    expression.loadStack(av[1]);
-    expression.get_result();
+    RPN expression(av[1]);
+    
+    try{
+         expression.performOperation();
+         std::cout << expression.getResult() << std::endl;
+    }
+    catch (std::exception &e){
+        std::cout << e.what() << std::endl;
+    }
 
     return 0;
 }
