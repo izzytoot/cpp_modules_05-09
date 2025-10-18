@@ -11,3 +11,12 @@
 /* ************************************************************************** */
 
 #include "../inc/PmergeMe.hpp"
+
+int main (int ac, char** av){
+    if (ac < 2){
+        std::cerr << RED << "Error. Usage: ./RPN <positive integer sequence>" << RES << std::endl;
+        return 1;
+    }
+
+    return 0;
+}

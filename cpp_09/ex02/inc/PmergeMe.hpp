@@ -27,3 +27,9 @@
 #define BCYA "\033[36;1m"
 #define RES "\033[0m"
 
+class PmergeMe{
+    private:
+
+    public:
+    
+};
