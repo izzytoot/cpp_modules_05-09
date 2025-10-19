@@ -6,7 +6,7 @@
 /*   By: isabeltootill <isabeltootill@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:39:21 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/10/19 01:05:16 by isabeltooti      ###   ########.fr       */
+/*   Updated: 2025/10/19 22:30:59 by isabeltooti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,48 @@ void PmergeMe::fillContainers(int ac, char** av){
     }
 }
 
+std::deque<int> PmergeMe::pairAndSortDeque(){
+    std::deque<int> res = this->_deque;
+    
+    for (std::deque<int>::const_iterator it = res.begin(); it != res.end(); ++it){
+        int tmp = *it;
+        if (tmp > *it++){
+            *it = tmp;
+            
+        }
+    }
+
+    
+}
+
+std::vector<int> PmergeMe::pairAndSortVector(){
+    
+}
+
 void PmergeMe::sort(){
-    std::cout << "Before for deque: ";
+    std::cout << YEL << "Before for deque: " << RES;
     for (std::deque<int>::const_iterator it = this->_deque.begin(); it != this->_deque.end(); ++it)
         std::cout << *it << " ";
     std::cout << std::endl;
   
-    std::cout << "Before for vector: ";
+    std::cout << YEL << "Before for vector: " << RES;
     for (size_t j = 0; j < this->_vector.size(); j++)
-        std::cout << _vector[j] << " ";
-    std::cout << std::endl; 
+        std::cout << this->_vector[j] << " ";
+    std::cout << std::endl;
+
+    clock_t start = clock();
+    std::deque<int> dqFJPhase1 = pairAndSortDeque();
+    //phase 2
+    //phase 3
+    clock_t end = clock();
+    double _dqTime = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000; // Convert to microseconds
+    std::cout << "Time to process a range of " << this->_deque.size() << " elements with std::deque: " << _dqTime << " us" << std::endl;
+    
+    start = clock();
+    std::vector<int> vecFJPhase1 = pairAndSortVector();
+    //phase 2
+    //phase 3
+    end = clock();
+    double _dqTime = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000; // Convert to microseconds
+    std::cout << "Time to process a range of " << this->_vector.size() << " elements with std::vector: " << _dqTime << " us" << std::endl;
 }

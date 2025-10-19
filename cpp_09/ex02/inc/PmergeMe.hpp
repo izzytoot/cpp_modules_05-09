@@ -6,7 +6,7 @@
 /*   By: isabeltootill <isabeltootill@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:39:21 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/10/19 00:24:07 by isabeltooti      ###   ########.fr       */
+/*   Updated: 2025/10/19 22:09:01 by isabeltooti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ class PmergeMe{
     private:
         std::deque<int> _deque;
         std::vector<int> _vector;
+
+        std::deque<int> pairAndSortDeque();
+        std::vector<int> pairAndSortVector();
 
     public:
         PmergeMe();
