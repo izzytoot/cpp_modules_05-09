@@ -6,7 +6,7 @@
 /*   By: isabeltootill <isabeltootill@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:39:21 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/10/18 11:39:13 by isabeltooti      ###   ########.fr       */
+/*   Updated: 2025/10/19 00:00:47 by isabeltooti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ class RPN {
     public:
         RPN(std::string input);
         RPN(const RPN& src);
-        const RPN& operator= (const RPN& src);
+        RPN& operator= (const RPN& src);
         ~RPN();
 
         void performOperation();

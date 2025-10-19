@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   PmergeMe.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isabeltootill <isabeltootill@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:39:21 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/10/18 11:39:41 by isabeltooti      ###   ########.fr       */
+/*   Updated: 2025/10/19 00:24:07 by isabeltooti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <iomanip>
 #include <stack>
 #include <exception>
+#include <cstdlib>
 
 #define RED "\033[0;31m"
 #define GRN "\033[0;32m"  
@@ -29,7 +30,15 @@
 
 class PmergeMe{
     private:
+        std::deque<int> _deque;
+        std::vector<int> _vector;
 
     public:
-    
+        PmergeMe();
+        PmergeMe(const PmergeMe& src);
+        PmergeMe& operator= (const PmergeMe& src);
+        ~PmergeMe();
+        
+        void fillContainers(int ac, char** av);
+        void sort();
 };
