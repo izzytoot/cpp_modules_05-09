@@ -6,7 +6,7 @@
 /*   By: isabeltootill <isabeltootill@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:39:21 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/10/19 22:09:01 by isabeltooti      ###   ########.fr       */
+/*   Updated: 2025/10/20 23:27:27 by isabeltooti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,11 @@ class PmergeMe{
         std::deque<int> _deque;
         std::vector<int> _vector;
 
-        std::deque<std::deque<int>> pairAndSortDeque(int level, size_t size);
-        std::vector<std::vector<int>> pairAndSortVector(int level, size_t size);
-
+        std::deque<std::deque<int> > pairAndSortDeque();
+        std::vector<std::vector<int> > pairAndSortVector();
+        std::deque<std::deque<int> > dequeRecursivePairing(std::deque<std::deque<int> > groups);
+        std::vector<std::vector<int> > vectorRecursivePairing(std::vector<std::vector<int> > groups);
+            
     public:
         PmergeMe();
         PmergeMe(const PmergeMe& src);
