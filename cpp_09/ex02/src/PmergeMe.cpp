@@ -49,21 +49,37 @@ void PmergeMe::fillContainers(int ac, char** av){
     }
 }
 
-std::deque<int> PmergeMe::pairAndSortDeque(){
-    std::deque<int> res = this->_deque;
-    
-    for (std::deque<int>::const_iterator it = res.begin(); it != res.end(); ++it){
-        int tmp = *it;
-        if (tmp > *it++){
-            *it = tmp;
-            
+std::deque<std::deque<int>> PmergeMe::pairAndSortDeque(int level, size_t size){
+    std::deque<std::deque<int>> pairs;
+
+
+    for (size_t i = 0; i + level < size; i += (2 * level)){
+        int a = this->_deque[i];
+        int b = this->_deque[i + 1];
+
+        if (a > b){
+            pairs.push_back(std::deque<int>(2 * level, 0));
+            pairs.back()[0] = a;
+            pairs.back()[1] = b;
+        }
+        else{
+            pairs.push_back(std::deque<int>(2 * level, 0));
+            pairs.back()[0] = b;
+            pairs.back()[1] = a;
         }
     }
 
+    pairs = pairAndSortDeque(2 * level, size);
+    
+    int oddNb = -1;
+    if (size % 2 != 0)
+        oddNb = this->_deque.back();
+    
+    
     
 }
 
-std::vector<int> PmergeMe::pairAndSortVector(){
+std::vector<std::vector<int>> PmergeMe::pairAndSortVector(int level, size_t size){
     
 }
 
@@ -78,8 +94,11 @@ void PmergeMe::sort(){
         std::cout << this->_vector[j] << " ";
     std::cout << std::endl;
 
+    size_t size = this->_deque.size();
+
     clock_t start = clock();
-    std::deque<int> dqFJPhase1 = pairAndSortDeque();
+    if (size <= 2) // compare 2 if 2
+        std::deque<std::deque<int>> dqFJPhase1 = pairAndSortDeque(1, size);
     //phase 2
     //phase 3
     clock_t end = clock();
@@ -87,7 +106,8 @@ void PmergeMe::sort(){
     std::cout << "Time to process a range of " << this->_deque.size() << " elements with std::deque: " << _dqTime << " us" << std::endl;
     
     start = clock();
-    std::vector<int> vecFJPhase1 = pairAndSortVector();
+    if (size <= 2) // compare 2 if 2
+        std::vector<std::vector<int>> vecFJPhase1 = pairAndSortVector(1, size);
     //phase 2
     //phase 3
     end = clock();

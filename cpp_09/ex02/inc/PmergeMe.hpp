@@ -17,6 +17,8 @@
 #include <stack>
 #include <exception>
 #include <cstdlib>
+#include <vector>
+
 
 #define RED "\033[0;31m"
 #define GRN "\033[0;32m"  
@@ -33,8 +35,8 @@ class PmergeMe{
         std::deque<int> _deque;
         std::vector<int> _vector;
 
-        std::deque<int> pairAndSortDeque();
-        std::vector<int> pairAndSortVector();
+        std::deque<std::deque<int>> pairAndSortDeque(int level, size_t size);
+        std::vector<std::vector<int>> pairAndSortVector(int level, size_t size);
 
     public:
         PmergeMe();
