@@ -69,15 +69,14 @@ std::deque<std::deque<int> > PmergeMe::dequeRecursivePairing(std::deque<std::deq
         nextRound.push_back(jointGroup);
     }
 
-    if (groups.size() % 2 != 0){
+    if (groups.size() % 2 != 0)
         nextRound.push_back(groups.back());
-    }
+
     return dequeRecursivePairing(nextRound);     
 }
 
 std::deque<std::deque<int> > PmergeMe::pairAndSortDeque(){
     std::deque<std::deque<int> > groups;
-
 
     for (size_t i = 0; i + 1 < this->_deque.size(); i += 2){
         std::deque<int> pair;
@@ -104,13 +103,57 @@ std::deque<std::deque<int> > PmergeMe::pairAndSortDeque(){
     return dequeRecursivePairing(groups);
 }
 
-// std::vector<std::vector<int> > PmergeMe::vectorRecursivePairing(std::vector<std::vector<int>> groups, int oddNb){
-
-// }
-
-// std::vector<std::vector<int> > PmergeMe::pairAndSortVector(){
+std::vector<std::vector<int> > PmergeMe::vectorRecursivePairing(std::vector<std::vector<int> > groups){
+    if (groups.size() < 2)
+        return groups;
     
-// }
+    std::vector<std::vector<int> > nextRound;
+    for (size_t i = 0; (i + 1) < groups.size(); i += 2){
+        std::vector<int>& A = groups[i];
+        std::vector<int>& B = groups[i + 1];
+
+        if (A.back() > B.back())
+            std::swap(A, B);
+        
+        std::vector<int> jointGroup;
+        jointGroup.insert(jointGroup.end(), A.begin(), B.begin());
+
+        nextRound.push_back(jointGroup);
+    }
+
+    if (groups.size() % 2 != 0)
+        nextRound.push_back(groups.back());
+    
+    return vectorRecursivePairing(nextRound);
+}
+
+std::vector<std::vector<int> > PmergeMe::pairAndSortVector(){
+    std::vector<std::vector<int> > groups;
+
+    for (size_t i = 0; (i + 1) < this->_vector.size(); i += 2){
+        std::vector<int> pair;
+        int a = this->_vector[i];
+        int b = this->_vector[i + 1];
+
+        if (a < b){
+            pair.push_back(a);
+            pair.push_back(b);
+        }
+        else{
+            pair.push_back(b);
+            pair.push_back(a);
+        }
+        groups.push_back(pair);
+    }
+    
+    if (this->_vector.size() % 2 != 0){
+        std::vector<int> oddNb;
+        oddNb.push_back(this->_vector.back());
+        groups.push_back(oddNb);
+    }
+        
+    return vectorRecursivePairing(groups);
+}
 
 void PmergeMe::sort(){
     std::cout << YEL << "Before for deque: " << RES;
@@ -128,14 +171,34 @@ void PmergeMe::sort(){
     //phase 2
     //phase 3
     clock_t end = clock();
-    double _dqTime = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000; // Convert to microseconds
-    std::cout << "Time to process a range of " << this->_deque.size() << " elements with std::deque: " << _dqTime << " us" << std::endl;
+    double _time = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000; // Convert to microseconds
+    std::cout << YEL << "Time to process a range of " << this->_deque.size() << " elements with" << BYEL << " std::deque: " << RES << _time << " us" << std::endl;
+    std::cout << YEL << "Deque phase 1: " << RES;
+    for (size_t i = 0; i < dqFJPhase1.size(); i++){
+        for (size_t j = 0; j < dqFJPhase1[i].size(); j++)
+            std::cout << dqFJPhase1[i][j] << " ";
+    }   
+    std::cout << std::endl;
+
+    try{
+        start = clock();
+        std::vector<std::vector<int> > vecFJPhase1 = pairAndSortVector();
+        //phase 2
+        //phase 3
+        end = clock();
+        
+        _time = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000; // Convert to microseconds
+        std::cout << YEL << "Time to process a range of " << this->_vector.size() << " elements with" << BYEL << " std::vector: " << RES << _time << " us" << std::endl;
+        
+        std::cout << std::endl;
+
+        std::cout << YEL << "Vector phase 1: " << RES;
+        for (size_t i = 0; i < vecFJPhase1.size(); i++){
+        for (size_t j = 0; j < vecFJPhase1[i].size(); j++)
+            std::cout << vecFJPhase1[i][j] << " ";
+        }   
+         std::cout << std::endl;
+    } catch (std::exception& e){}
     
-    // start = clock();
-    // std::vector<std::vector<int>> vecFJPhase1 = pairAndSortVector();
-    // //phase 2
-    // //phase 3
-    // end = clock();
-    // double _dqTime = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000; // Convert to microseconds
-    // std::cout << "Time to process a range of " << this->_vector.size() << " elements with std::vector: " << _dqTime << " us" << std::endl;
+
 }
