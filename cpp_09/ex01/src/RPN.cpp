@@ -18,7 +18,7 @@ RPN::RPN(std::string input): _input(input) {}
 
 RPN::RPN(const RPN& src): _input(src._input), _stack(src._stack) {}
 
-const RPN& RPN::operator= (const RPN& src) {
+RPN& RPN::operator= (const RPN& src) {
     if (this != &src){
         this->_input = src._input;
         this->_stack = src._stack;
