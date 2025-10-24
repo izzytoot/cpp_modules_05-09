@@ -59,6 +59,14 @@ std::deque<std::deque<int> > PmergeMe::dequeRecursivePairing(std::deque<std::deq
         std::deque<int>& A = groups[i];
         std::deque<int>& B = groups[i + 1];
 
+        if (A.size() != B.size()){
+            std::deque <int> jointGroup;
+            jointGroup.insert(jointGroup.end(), A.begin(), A.end());
+            jointGroup.insert(jointGroup.end(), B.begin(), B.end());
+
+            nextRound.push_back(jointGroup);
+            break;
+        }
         if (A.back() > B.back())
             std::swap(A, B);
         
@@ -112,6 +120,15 @@ std::vector<std::vector<int> > PmergeMe::vectorRecursivePairing(std::vector<std:
     for (size_t i = 0; (i + 1) < groups.size(); i += 2){
         std::vector<int> A = groups[i];
         std::vector<int> B = groups[i + 1];
+
+        if (A.size() != B.size()){
+            std::vector <int> jointGroup;
+            jointGroup.insert(jointGroup.end(), A.begin(), A.end());
+            jointGroup.insert(jointGroup.end(), B.begin(), B.end());
+
+            nextRound.push_back(jointGroup);
+            break;
+        }
 
         if (A.back() > B.back())
             std::swap(A, B);
