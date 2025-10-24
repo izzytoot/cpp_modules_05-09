@@ -35,7 +35,7 @@ void PmergeMe::fillContainers(int ac, char** av){
                 val += currArg[j];
             }
             else if (currArg[j] != ' ')
-                std::runtime_error(RED"Error: invalid char in argument"RES);
+                std::runtime_error(RED "Error: invalid char in argument" RES);
         }
         
         int currNb;
@@ -45,7 +45,7 @@ void PmergeMe::fillContainers(int ac, char** av){
             this->_deque.push_back(currNb);   
         }
         else
-            std::runtime_error(RED"Error: empty argument"RES);
+            std::runtime_error(RED "Error: empty argument" RES);
     }
 }
 
@@ -123,7 +123,7 @@ std::vector<std::vector<int> > PmergeMe::vectorRecursivePairing(std::vector<std:
 
     if (groups.size() % 2 != 0)
         nextRound.push_back(groups.back());
-    
+
     return vectorRecursivePairing(nextRound);
 }
 
@@ -151,7 +151,7 @@ std::vector<std::vector<int> > PmergeMe::pairAndSortVector(){
         oddNb.push_back(this->_vector.back());
         groups.push_back(oddNb);
     }
-        
+     
     return vectorRecursivePairing(groups);
 }
 
@@ -166,38 +166,41 @@ void PmergeMe::sort(){
         std::cout << this->_vector[j] << " ";
     std::cout << std::endl;
 
-    clock_t start = clock();
-    std::deque<std::deque<int> > dqFJPhase1 = pairAndSortDeque();
-    //phase 2
-    //phase 3
-    clock_t end = clock();
-    double _time = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000; // Convert to microseconds
-    std::cout << YEL << "Time to process a range of " << this->_deque.size() << " elements with" << BYEL << " std::deque: " << RES << _time << " us" << std::endl;
-    std::cout << YEL << "Deque phase 1: " << RES;
-    for (size_t i = 0; i < dqFJPhase1.size(); i++){
-        for (size_t j = 0; j < dqFJPhase1[i].size(); j++)
-            std::cout << dqFJPhase1[i][j] << " ";
-    }   
-    std::cout << std::endl;
+    try{
+        clock_t start = clock();
+        std::deque<std::deque<int> > dqFJPhase1 = pairAndSortDeque();
+        //phase 2
+        //phase 3
+        clock_t end = clock();
+
+        std::cout << std::endl;
+        std::cout << YEL << "Deque phase 1: " << RES;
+        for (size_t i = 0; i < dqFJPhase1.size(); i++){
+            for (size_t j = 0; j < dqFJPhase1[i].size(); j++)
+                std::cout << dqFJPhase1[i][j] << " ";
+        }
+        double _time = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000; // Convert to microseconds
+        std::cout << std::endl;
+        std::cout << YEL << "Time to process a range of " << this->_deque.size() << " elements with" << BYEL << " std::deque: " << RES << _time << " us" << std::endl;
+        std::cout << std::endl;
+    } catch(std::exception& e){}
 
     try{
-        start = clock();
+        clock_t start = clock();
         std::vector<std::vector<int> > vecFJPhase1 = pairAndSortVector();
         //phase 2
         //phase 3
-        end = clock();
+        clock_t end = clock();
         
-        _time = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000; // Convert to microseconds
+        std::cout << YEL << "Vector phase 1: " << RES;
+        for (int i = 0; i < static_cast<int>(vecFJPhase1.size()); i++){
+        for (int j = 0; j < static_cast<int>(vecFJPhase1.size()); j++)
+            std::cout << vecFJPhase1[i][j] << " ";
+        }  
+        std::cout << std::endl;
+        long _time = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000; // Convert to microseconds
         std::cout << YEL << "Time to process a range of " << this->_vector.size() << " elements with" << BYEL << " std::vector: " << RES << _time << " us" << std::endl;
         
-        std::cout << std::endl;
-
-        std::cout << YEL << "Vector phase 1: " << RES;
-        for (size_t i = 0; i < vecFJPhase1.size(); i++){
-        for (size_t j = 0; j < vecFJPhase1[i].size(); j++)
-            std::cout << vecFJPhase1[i][j] << " ";
-        }   
-         std::cout << std::endl;
     } catch (std::exception& e){}
     
 
