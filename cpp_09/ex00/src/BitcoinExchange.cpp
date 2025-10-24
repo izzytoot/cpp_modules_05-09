@@ -28,12 +28,12 @@ void BitcoinExchange::loadDataBase(const std::string& dbFile) {
     std::ifstream database(dbFile.c_str());
 
     if (!database.is_open())
-        throw std::runtime_error(RED"Error! Couldn't open database file."RES);
+        throw std::runtime_error(RED "Error! Couldn't open database file." RES);
     
     std::string line;
     std::getline(database, line);
     if (line != "date,exchange_rate")
-        throw std::runtime_error(RED"Error! Database file should start with \"date, exchange_rate\"."RES);
+        throw std::runtime_error(RED"Error! Database file should start with \"date, exchange_rate\"." RES);
     line.clear();
     while (std::getline(database, line)){
         size_t commaPos = line.find(',');
@@ -44,10 +44,10 @@ void BitcoinExchange::loadDataBase(const std::string& dbFile) {
         std::string rateStr = trimString(line.substr(commaPos + 1));
         
         if (dateStr.size() != 10 || dateStr[4] != '-' || dateStr[7] != '-')
-            throw std::runtime_error(RED"Error! Invalid date found in database."RES);
+            throw std::runtime_error(RED "Error! Invalid date found in database." RES);
         float rateFloat = toFloat(rateStr);
         if (rateFloat < 0)
-            throw std::runtime_error(RED"Error! Invalid rate found in database."RES);
+            throw std::runtime_error(RED "Error! Invalid rate found in database." RES);
   
         _db[dateStr] = rateFloat;
     }
@@ -66,12 +66,12 @@ void BitcoinExchange::convert(std::string inputFile) {
     std::ifstream input(inputFile.c_str());
     
     if (!input.is_open())
-        throw std::runtime_error(RED"Error! Couldn't open input file."RES);
+        throw std::runtime_error(RED "Error! Couldn't open input file." RES);
     
     std::string line;
     std::getline(input, line);
     if (line != "date | value")
-        throw std::runtime_error(RED"Error! Input file should start with \"date | value\"."RES);
+        throw std::runtime_error(RED "Error! Input file should start with \"date | value\"." RES);
     line.clear();
     while (std::getline(input, line)){
         size_t spPos1 = line.find(' ');
@@ -179,7 +179,7 @@ bool BitcoinExchange::isValidValue(const std::string& valueStr) {
 
 float BitcoinExchange::getRate(const std::string& date) const{
     if (_db.empty())
-        throw std::runtime_error(RED"Error! Database is empty."RES);
+        throw std::runtime_error(RED "Error! Database is empty." RES);
 
     std::map<std::string, float>::const_iterator it = _db.lower_bound(date);
     
@@ -187,7 +187,7 @@ float BitcoinExchange::getRate(const std::string& date) const{
         return it->second;
     
     if (it == _db.begin())
-        throw std::runtime_error(RED"Error! Date too early: no data available."RES);
+        throw std::runtime_error(RED "Error! Date too early: no data available." RES);
     
     --it;
     return it->second;
