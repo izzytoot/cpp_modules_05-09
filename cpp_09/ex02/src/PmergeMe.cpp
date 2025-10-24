@@ -108,16 +108,17 @@ std::vector<std::vector<int> > PmergeMe::vectorRecursivePairing(std::vector<std:
         return groups;
     
     std::vector<std::vector<int> > nextRound;
+
     for (size_t i = 0; (i + 1) < groups.size(); i += 2){
-        std::vector<int>& A = groups[i];
-        std::vector<int>& B = groups[i + 1];
+        std::vector<int> A = groups[i];
+        std::vector<int> B = groups[i + 1];
 
         if (A.back() > B.back())
             std::swap(A, B);
-        
-        std::vector<int> jointGroup;
-        jointGroup.insert(jointGroup.end(), A.begin(), B.begin());
 
+        std::vector<int> jointGroup;
+        jointGroup.insert(jointGroup.end(), A.begin(), A.end());
+        jointGroup.insert(jointGroup.end(), B.begin(), B.end());
         nextRound.push_back(jointGroup);
     }
 
@@ -175,8 +176,8 @@ void PmergeMe::sort(){
 
         std::cout << std::endl;
         std::cout << YEL << "Deque phase 1: " << RES;
-        for (size_t i = 0; i < dqFJPhase1.size(); i++){
-            for (size_t j = 0; j < dqFJPhase1[i].size(); j++)
+        for (int i = 0; i < static_cast<int>(dqFJPhase1.size()); i++){
+            for (int j = 0; j < static_cast<int>(dqFJPhase1[i].size()); j++)
                 std::cout << dqFJPhase1[i][j] << " ";
         }
         double _time = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000; // Convert to microseconds
@@ -194,7 +195,7 @@ void PmergeMe::sort(){
         
         std::cout << YEL << "Vector phase 1: " << RES;
         for (int i = 0; i < static_cast<int>(vecFJPhase1.size()); i++){
-        for (int j = 0; j < static_cast<int>(vecFJPhase1.size()); j++)
+            for (int j = 0; j < static_cast<int>(vecFJPhase1[i].size()); j++)
             std::cout << vecFJPhase1[i][j] << " ";
         }  
         std::cout << std::endl;
