@@ -32,8 +32,10 @@
 
 class PmergeMe{
     private:
-        std::deque<int> _deque;
-        std::vector<int> _vector;
+        std::deque<int> _dequeBefore;
+        std::vector<int> _vectorBefore;
+        std::deque<int> _dequeAfter;
+        std::vector<int> _vectorAfter;
 
         std::deque<std::deque<int> > pairAndSortDeque();
         std::vector<std::vector<int> > pairAndSortVector();

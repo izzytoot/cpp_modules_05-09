@@ -14,12 +14,14 @@
 
 PmergeMe::PmergeMe(){}
 
-PmergeMe::PmergeMe(const PmergeMe& src): _deque(src._deque), _vector(src._vector) {}
+PmergeMe::PmergeMe(const PmergeMe& src): _dequeBefore(src._dequeBefore), _vectorBefore(src._vectorBefore),_dequeAfter(src._dequeAfter), _vectorAfter(src._vectorAfter) {}
 
 PmergeMe& PmergeMe::operator= (const PmergeMe& src){
     if (this != &src){
-        this->_deque = src._deque;
-        this->_vector = src._vector;
+        this->_dequeBefore = src._dequeBefore;
+        this->_vectorBefore = src._vectorBefore;
+        this->_dequeAfter = src._dequeAfter;
+        this->_vectorAfter = src._vectorAfter;
     }
     return *this;
 }
@@ -35,17 +37,18 @@ void PmergeMe::fillContainers(int ac, char** av){
                 val += currArg[j];
             }
             else if (currArg[j] != ' ')
-                std::runtime_error(RED "Error: invalid char in argument" RES);
+                throw std::runtime_error(RED "Error: invalid char in argument" RES);
         }
-        
         int currNb;
         if (!val.empty()){
             currNb = std::atoi(val.c_str());
-            this->_vector.push_back(currNb);
-            this->_deque.push_back(currNb);   
+            if (currNb < 0 || currNb > 1000)
+                throw std::runtime_error(RED "Error: invalid input value" RES);
+            this->_vectorBefore.push_back(currNb);
+            this->_dequeBefore.push_back(currNb);   
         }
         else
-            std::runtime_error(RED "Error: empty argument" RES);
+            throw std::runtime_error(RED "Error: empty argument" RES);
     }
 }
 
@@ -86,10 +89,10 @@ std::deque<std::deque<int> > PmergeMe::dequeRecursivePairing(std::deque<std::deq
 std::deque<std::deque<int> > PmergeMe::pairAndSortDeque(){
     std::deque<std::deque<int> > groups;
 
-    for (size_t i = 0; i + 1 < this->_deque.size(); i += 2){
+    for (size_t i = 0; i + 1 < this->_dequeBefore.size(); i += 2){
         std::deque<int> pair;
-        int a = this->_deque[i];
-        int b = this->_deque[i + 1];
+        int a = this->_dequeBefore[i];
+        int b = this->_dequeBefore[i + 1];
 
         if (a < b){
             pair.push_back(a);
@@ -102,9 +105,9 @@ std::deque<std::deque<int> > PmergeMe::pairAndSortDeque(){
         groups.push_back(pair);
     }
     
-    if (this->_deque.size() % 2 != 0){
+    if (this->_dequeBefore.size() % 2 != 0){
         std::deque<int> oddNb;
-        oddNb.push_back(this->_deque.back());
+        oddNb.push_back(this->_dequeBefore.back());
         groups.push_back(oddNb);
     }
         
@@ -148,10 +151,10 @@ std::vector<std::vector<int> > PmergeMe::vectorRecursivePairing(std::vector<std:
 std::vector<std::vector<int> > PmergeMe::pairAndSortVector(){
     std::vector<std::vector<int> > groups;
 
-    for (size_t i = 0; (i + 1) < this->_vector.size(); i += 2){
+    for (size_t i = 0; (i + 1) < this->_vectorBefore.size(); i += 2){
         std::vector<int> pair;
-        int a = this->_vector[i];
-        int b = this->_vector[i + 1];
+        int a = this->_vectorBefore[i];
+        int b = this->_vectorBefore[i + 1];
 
         if (a < b){
             pair.push_back(a);
@@ -164,9 +167,9 @@ std::vector<std::vector<int> > PmergeMe::pairAndSortVector(){
         groups.push_back(pair);
     }
     
-    if (this->_vector.size() % 2 != 0){
+    if (this->_vectorBefore.size() % 2 != 0){
         std::vector<int> oddNb;
-        oddNb.push_back(this->_vector.back());
+        oddNb.push_back(this->_vectorBefore.back());
         groups.push_back(oddNb);
     }
      
@@ -175,13 +178,13 @@ std::vector<std::vector<int> > PmergeMe::pairAndSortVector(){
 
 void PmergeMe::sort(){
     std::cout << YEL << "Before for deque: " << RES;
-    for (std::deque<int>::const_iterator it = this->_deque.begin(); it != this->_deque.end(); ++it)
+    for (std::deque<int>::const_iterator it = this->_dequeBefore.begin(); it != this->_dequeBefore.end(); ++it)
         std::cout << *it << " ";
     std::cout << std::endl;
   
     std::cout << YEL << "Before for vector: " << RES;
-    for (size_t j = 0; j < this->_vector.size(); j++)
-        std::cout << this->_vector[j] << " ";
+    for (size_t j = 0; j < this->_vectorBefore.size(); j++)
+        std::cout << this->_vectorBefore[j] << " ";
     std::cout << std::endl;
 
     try{
@@ -199,7 +202,7 @@ void PmergeMe::sort(){
         }
         double _time = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000; // Convert to microseconds
         std::cout << std::endl;
-        std::cout << YEL << "Time to process a range of " << this->_deque.size() << " elements with" << BYEL << " std::deque: " << RES << _time << " us" << std::endl;
+        std::cout << YEL << "Time to process a range of " << this->_dequeBefore.size() << " elements with" << BYEL << " std::deque: " << RES << _time << " us" << std::endl;
         std::cout << std::endl;
     } catch(std::exception& e){}
 
@@ -217,7 +220,7 @@ void PmergeMe::sort(){
         }  
         std::cout << std::endl;
         long _time = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000; // Convert to microseconds
-        std::cout << YEL << "Time to process a range of " << this->_vector.size() << " elements with" << BYEL << " std::vector: " << RES << _time << " us" << std::endl;
+        std::cout << YEL << "Time to process a range of " << this->_vectorBefore.size() << " elements with" << BYEL << " std::vector: " << RES << _time << " us" << std::endl;
         
     } catch (std::exception& e){}
     

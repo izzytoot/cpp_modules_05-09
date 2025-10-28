@@ -18,9 +18,14 @@ int main (int ac, char** av){
         return 1;
     }
 
-    PmergeMe sequence;
-    sequence.fillContainers(ac, av);
-    sequence.sort();
-    
+    try {
+        PmergeMe sequence;
+        sequence.fillContainers(ac, av);
+        sequence.sort();
+    } catch(const std::exception& e){
+        std::cerr << e.what() << std::endl;
+        return 1;
+    }
+
     return 0;
 }
