@@ -52,66 +52,116 @@ void PmergeMe::fillContainers(int ac, char** av){
     }
 }
 
-std::deque<std::deque<int> > PmergeMe::dequeRecursivePairing(std::deque<std::deque<int> > groups){
+std::deque<std::deque<_elm> > PmergeMe::dequeRecursivePairing(std::deque<std::deque<_elm> > groups, int rlvl){
     if (groups.size() < 2)
         return groups;
 
-    std::deque<std::deque<int> > nextRound;
-    
-    for (size_t i = 0; i + 1 < groups.size(); i += 2){
-        std::deque<int>& A = groups[i];
-        std::deque<int>& B = groups[i + 1];
+    ++rlvl; // current recursion level for merged groups
+    std::deque<std::deque<_elm> > nextRound;
+    int nextGlvl = 0; // group id counter for this recursion level
 
-        if (A.size() != B.size()){
-            std::deque <int> jointGroup;
-            jointGroup.insert(jointGroup.end(), A.begin(), A.end());
-            jointGroup.insert(jointGroup.end(), B.begin(), B.end());
+    for (size_t i = 0; i + 1 < groups.size(); i += 2){
+        std::deque<_elm> X = groups[i];
+        std::deque<_elm> Y = groups[i + 1];
+
+        if (X.size() != Y.size()){
+            ++nextGlvl;
+            std::deque <_elm> jointGroup;
+            jointGroup.insert(jointGroup.end(), X.begin(), X.end());
+            jointGroup.insert(jointGroup.end(), Y.begin(), Y.end());
+
+            for (std::deque<_elm>::iterator it = jointGroup.begin(); it != jointGroup.end(); ++it) {
+                it->rlvl = rlvl;
+                it->lableInt = nextGlvl;
+            }
 
             nextRound.push_back(jointGroup);
             break;
         }
-        if (A.back() > B.back())
-            std::swap(A, B);
-        
-        std::deque <int> jointGroup;
-        jointGroup.insert(jointGroup.end(), A.begin(), A.end());
-        jointGroup.insert(jointGroup.end(), B.begin(), B.end());
 
+        if (X.back().val > Y.back().val)
+            std::swap(X, Y);
+            
+        
+        ++nextGlvl;
+        std::deque <_elm> jointGroup;
+        jointGroup.insert(jointGroup.end(), X.begin(), X.end());
+        jointGroup.insert(jointGroup.end(), Y.begin(), Y.end());
+
+        for (std::deque<_elm>::iterator it = jointGroup.begin(); it != jointGroup.end(); ++it) {
+            it->rlvl = rlvl;
+            it->lableInt = nextGlvl;
+        }
+        
         nextRound.push_back(jointGroup);
     }
 
-    if (groups.size() % 2 != 0)
-        nextRound.push_back(groups.back());
+    if (groups.size() % 2 != 0){
+        std::deque<_elm> oddGr = groups.back();
+        ++nextGlvl;
 
-    return dequeRecursivePairing(nextRound);     
+        for (std::deque<_elm>::iterator it = oddGr.begin(); it != oddGr.end(); ++it) {
+            it->rlvl = rlvl;
+            it->lableInt = nextGlvl;
+        }
+        
+        nextRound.push_back(oddGr);
+    }
+        
+    return dequeRecursivePairing(nextRound, rlvl);     
 }
 
-std::deque<std::deque<int> > PmergeMe::pairAndSortDeque(){
-    std::deque<std::deque<int> > groups;
+std::deque<std::deque<_elm> > PmergeMe::pairAndSortDeque(){
+    std::deque<std::deque<_elm> > groups;
+    int glvl = 0; // group id for level 1 pairs (will start at 1)
+    int rlvl = 1; // recursion level 1 for initial pairs
 
     for (size_t i = 0; i + 1 < this->_dequeBefore.size(); i += 2){
-        std::deque<int> pair;
-        int a = this->_dequeBefore[i];
-        int b = this->_dequeBefore[i + 1];
+        std::deque<_elm> pair;
+        _elm x, y;
+        glvl++;
+        
+        x.val = this->_dequeBefore[i];
+        y.val = this->_dequeBefore[i + 1];
 
-        if (a < b){
-            pair.push_back(a);
-            pair.push_back(b);
+        // set original pair metadata: keep lableChar ('b' is smaller, 'a' is larger)
+        if (x.val < y.val){
+            x.lableChar = 'b';
+            x.lableInt = glvl;
+            x.rlvl = rlvl;
+            y.lableChar = 'a';
+            y.lableInt = glvl;
+            y.rlvl = rlvl;
+            pair.push_back(x);
+            pair.push_back(y);
         }
         else{
-            pair.push_back(b);
-            pair.push_back(a);
+            x.lableChar = 'a';
+            x.lableInt = glvl;
+            x.rlvl = rlvl;
+            y.lableChar = 'b';
+            y.lableInt = glvl;
+            y.rlvl = rlvl;
+            pair.push_back(y);
+            pair.push_back(x);
         }
         groups.push_back(pair);
     }
     
     if (this->_dequeBefore.size() % 2 != 0){
-        std::deque<int> oddNb;
-        oddNb.push_back(this->_dequeBefore.back());
+        std::deque<_elm> oddNb;
+        _elm odd;
+        ++glvl;
+
+        odd.val = this->_dequeBefore.back();
+        odd.lableChar = 'b';
+        odd.lableInt = glvl;
+        odd.rlvl = rlvl;
+        oddNb.push_back(odd);
         groups.push_back(oddNb);
     }
         
-    return dequeRecursivePairing(groups);
+    return dequeRecursivePairing(groups, rlvl);
 }
 
 std::vector<std::vector<int> > PmergeMe::vectorRecursivePairing(std::vector<std::vector<int> > groups){
@@ -189,7 +239,7 @@ void PmergeMe::sort(){
 
     try{
         clock_t start = clock();
-        std::deque<std::deque<int> > dqFJPhase1 = pairAndSortDeque();
+        std::deque<std::deque<_elm> > dqFJPhase1 = pairAndSortDeque();
         //phase 2
         //phase 3
         clock_t end = clock();
@@ -198,7 +248,7 @@ void PmergeMe::sort(){
         std::cout << YEL << "Deque phase 1: " << RES;
         for (int i = 0; i < static_cast<int>(dqFJPhase1.size()); i++){
             for (int j = 0; j < static_cast<int>(dqFJPhase1[i].size()); j++)
-                std::cout << dqFJPhase1[i][j] << " ";
+                std::cout << "val:" << BGRN << dqFJPhase1[i][j].val << RES << ", " <<  dqFJPhase1[i][j].lableChar << dqFJPhase1[i][j].lableInt << ", " << dqFJPhase1[i][j].rlvl << " | ";
         }
         double _time = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000; // Convert to microseconds
         std::cout << std::endl;

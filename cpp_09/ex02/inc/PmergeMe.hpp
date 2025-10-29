@@ -30,6 +30,13 @@
 #define BCYA "\033[36;1m"
 #define RES "\033[0m"
 
+struct _elm{
+    int val;
+    char lableChar;
+    int lableInt;
+    int rlvl;
+};
+
 class PmergeMe{
     private:
         std::deque<int> _dequeBefore;
@@ -37,9 +44,9 @@ class PmergeMe{
         std::deque<int> _dequeAfter;
         std::vector<int> _vectorAfter;
 
-        std::deque<std::deque<int> > pairAndSortDeque();
+        std::deque<std::deque<_elm> > pairAndSortDeque();
         std::vector<std::vector<int> > pairAndSortVector();
-        std::deque<std::deque<int> > dequeRecursivePairing(std::deque<std::deque<int> > groups);
+        std::deque<std::deque<_elm> > dequeRecursivePairing(std::deque<std::deque<_elm> > groups, int rlvl);
         std::vector<std::vector<int> > vectorRecursivePairing(std::vector<std::vector<int> > groups);
             
     public:
