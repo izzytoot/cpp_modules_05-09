@@ -6,7 +6,7 @@
 /*   By: isabeltootill <isabeltootill@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:39:21 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/10/20 23:27:27 by isabeltooti      ###   ########.fr       */
+/*   Updated: 2025/11/01 14:09:08 by isabeltooti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ class PmergeMe{
         std::deque<int> _dequeAfter;
         std::vector<int> _vectorAfter;
 
-        std::deque<std::deque<_elm> > pairAndSortDeque();
+        std::deque<std::deque<std::deque<_elm> > > pairAndSortDeque();
         std::vector<std::vector<int> > pairAndSortVector();
-        std::deque<std::deque<_elm> > dequeRecursivePairing(std::deque<std::deque<_elm> > groups, int rlvl);
+        std::deque<std::deque<std::deque<_elm> > > dequeRecursivePairing(std::deque<std::deque<std::deque<_elm> > >& deqMetaData, std::deque<std::deque<_elm> > groups, int rlvl, size_t size);
         std::vector<std::vector<int> > vectorRecursivePairing(std::vector<std::vector<int> > groups);
             
     public:
