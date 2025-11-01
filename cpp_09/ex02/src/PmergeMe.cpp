@@ -52,7 +52,7 @@ void PmergeMe::fillContainers(int ac, char** av){
     }
 }
 
-std::vector<std::vector<int> > PmergeMe::vectorRecursivePairing(std::vector<std::vector<int> > groups, int lvl, size_t gSize){
+std::vector<std::vector<int> > PmergeMe::vectorRecursiveSorting(std::vector<std::vector<int> > groups, int lvl, size_t gSize){
     if (groups.size() < 2 || (groups[0].size() != groups[1].size()))
         return groups;
     
@@ -62,15 +62,6 @@ std::vector<std::vector<int> > PmergeMe::vectorRecursivePairing(std::vector<std:
     for (size_t i = 0; (i + 1) < groups.size(); i += 2){
         std::vector<int> A = groups[i];
         std::vector<int> B = groups[i + 1];
-
-        // if (A.size() != B.size()){
-        //     std::vector <int> jointGroup;
-        //     jointGroup.insert(jointGroup.end(), A.begin(), A.end());
-        //     jointGroup.insert(jointGroup.end(), B.begin(), B.end());
-
-        //     nextRound.push_back(jointGroup);
-        //     break;
-        // }
 
         if (A.back() > B.back() && (A.size() == B.size()))
             std::swap(A, B);
@@ -92,8 +83,49 @@ std::vector<std::vector<int> > PmergeMe::vectorRecursivePairing(std::vector<std:
     }
     std::cout << std::endl;
 
-    vectorRecursivePairing(nextRound, lvl, (gSize * 2));
+    nextRound = vectorRecursiveSorting(nextRound, lvl, (gSize * 2));
 
+    //HERE
+    
+    std::vector<std::vector<int> > main;
+    std::vector<std::vector<int> > pend;
+    std::vector<std::vector<int> > nonPart;
+
+    for (int i = 0; i < static_cast<int>(groups.size()); i++){
+        if (groups[i].size() == (gSize * 2)){
+            if ((i == 0) || ((i % 2) != 0))
+                main.push_back(groups[i]);
+            else
+                pend.push_back(groups[i]);
+        }
+        else
+            nonPart.push_back(groups[i]);
+    }
+
+    std::cout << BGRN << "Main lvl " << lvl << ": " <<RES;
+    for (int i = 0; i < static_cast<int>(main.size()); i++){
+        for (int j = 0; j < static_cast<int>(main[i].size()); j++)
+            std::cout << main[i][j] << " ";
+        std::cout << " . ";
+    }
+    std::cout << std::endl;
+
+    std::cout << BGRN << "Pend lvl " << lvl << ": " <<RES;
+    for (int i = 0; i < static_cast<int>(pend.size()); i++){
+        for (int j = 0; j < static_cast<int>(pend[i].size()); j++)
+            std::cout << pend[i][j] << " ";
+        std::cout << " . ";
+    }
+    std::cout << std::endl;
+
+    std::cout << BGRN << "NonPart lvl " << lvl << ": " <<RES;
+    for (int i = 0; i < static_cast<int>(nonPart.size()); i++){
+        for (int j = 0; j < static_cast<int>(nonPart[i].size()); j++)
+            std::cout << nonPart[i][j] << " ";
+        std::cout << " . ";
+    }
+    std::cout << std::endl;
+    
     return groups;
 }
 
@@ -129,7 +161,7 @@ std::vector<std::vector<int> > PmergeMe::pairAndSortVector(){
     }
     std::cout << std::endl;
 
-    std::vector<std::vector<int> > finalVec = vectorRecursivePairing(groups, 1, 1);
+    std::vector<std::vector<int> > finalVec = vectorRecursiveSorting(groups, 1, 1);
 
     return (finalVec);
 }

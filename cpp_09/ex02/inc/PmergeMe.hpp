@@ -38,7 +38,7 @@ class PmergeMe{
         std::vector<int> _vectorAfter;
 
         std::vector<std::vector<int> > pairAndSortVector();
-        std::vector<std::vector<int> > vectorRecursivePairing(std::vector<std::vector<int> > groups, int lvl, size_t gSize);
+        std::vector<std::vector<int> > vectorRecursiveSorting(std::vector<std::vector<int> > groups, int lvl, size_t gSize);
             
     public:
         PmergeMe();
