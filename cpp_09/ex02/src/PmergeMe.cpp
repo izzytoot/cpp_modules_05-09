@@ -6,7 +6,7 @@
 /*   By: isabeltootill <isabeltootill@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:39:21 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/11/01 14:11:57 by isabeltooti      ###   ########.fr       */
+/*   Updated: 2025/11/02 18:12:41 by isabeltooti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,43 @@ void PmergeMe::fillContainers(int ac, char** av){
     }
 }
 
+std::vector<std::vector<int> > PmergeMe::reSizeNextRound(const std::vector<std::vector<int> >& recGroups, size_t gSize)
+{
+    std::vector<std::vector<int> > reSizedGroups;
+    //for each group within recursived group
+    for (size_t i = 0; i < recGroups.size(); ++i) {
+        const std::vector<int>& prevGrouping = recGroups[i];
+        size_t size = prevGrouping.size();
+        //if group has grouping size - divide into half and push
+        if (size >= 2 * gSize) {
+            reSizedGroups.push_back(std::vector<int>(prevGrouping.begin(), prevGrouping.begin() + gSize));
+            reSizedGroups.push_back(std::vector<int>(prevGrouping.begin() + gSize, prevGrouping.begin() + (2 * gSize)));
+            //Extra tail - shouldn't happen
+            if (size > 2 * gSize) {
+                reSizedGroups.push_back(std::vector<int>(prevGrouping.begin() + 2 * gSize, prevGrouping.end()));
+            }
+        }
+        //if group has exactly half grouping size (size we're fitting into now) - push
+        else if (size == gSize) {
+            reSizedGroups.push_back(prevGrouping);
+        }
+        //if group has more than half grouping size - push half first and then remainder
+        else if (size >= gSize){
+                reSizedGroups.push_back(std::vector<int>(prevGrouping.begin(), prevGrouping.begin() + gSize));
+                reSizedGroups.push_back(std::vector<int>(prevGrouping.begin() + gSize, prevGrouping.end()));
+        }
+        //if group has less than half grouping size - push it all (remainder)
+        else {
+              reSizedGroups.push_back(prevGrouping);
+        }
+    }
+    return reSizedGroups;
+}
+
 std::vector<std::vector<int> > PmergeMe::vectorRecursiveSorting(std::vector<std::vector<int> > groups, int lvl, size_t gSize){
-    if (groups.size() < 2 || (groups[0].size() != groups[1].size()))
-        return groups;
-    
-    lvl++;
+        
     std::vector<std::vector<int> > nextRound;
+    lvl++;
 
     for (size_t i = 0; (i + 1) < groups.size(); i += 2){
         std::vector<int> A = groups[i];
@@ -83,14 +114,23 @@ std::vector<std::vector<int> > PmergeMe::vectorRecursiveSorting(std::vector<std:
     }
     std::cout << std::endl;
 
-    nextRound = vectorRecursiveSorting(nextRound, lvl, (gSize * 2));
-
-    //HERE
+    if (!(nextRound.size() < 2 || (nextRound[0].size() != nextRound[1].size()))){
+        std::vector<std::vector<int> > recGroups = vectorRecursiveSorting(nextRound, lvl, (gSize * 2));
+        groups = reSizeNextRound(recGroups, (gSize * 2));
+    }
     
     std::vector<std::vector<int> > main;
     std::vector<std::vector<int> > pend;
     std::vector<std::vector<int> > nonPart;
 
+    std::cout << BRED << "Reordered groups lvl " << lvl << ": ";
+    for (int i = 0; i < static_cast<int>(groups.size()); i++){
+        for (int j = 0; j < static_cast<int>(groups[i].size()); j++)
+            std::cout << groups[i][j] << " ";
+        std::cout << " . ";
+    }
+    std::cout << RES << std::endl;
+    
     for (int i = 0; i < static_cast<int>(groups.size()); i++){
         if (groups[i].size() == (gSize * 2)){
             if ((i == 0) || ((i % 2) != 0))
@@ -101,7 +141,7 @@ std::vector<std::vector<int> > PmergeMe::vectorRecursiveSorting(std::vector<std:
         else
             nonPart.push_back(groups[i]);
     }
-
+    
     std::cout << BGRN << "Main lvl " << lvl << ": " <<RES;
     for (int i = 0; i < static_cast<int>(main.size()); i++){
         for (int j = 0; j < static_cast<int>(main[i].size()); j++)
@@ -126,7 +166,24 @@ std::vector<std::vector<int> > PmergeMe::vectorRecursiveSorting(std::vector<std:
     }
     std::cout << std::endl;
     
-    return groups;
+    //HERE - UNDERSTAND AND CREATE 2 FUNCTS
+    if (!pend.empty()){
+        std::vector<int> jacobSthalSeq = createJacobSthalSeq(pend.size());
+        size_t last = 0; //why??
+        
+        for (size_t i = 0; i < jacobSthalSeq.size(); i++){
+            size_t groupStart = jacobSthalSeq[i]; //print
+            if (groupStart > pend.size())
+                groupStart = pend.size(); //why?
+            for (size_t j = groupStart; j > last; j--){
+                size_t pos = binarySearchVec(main, pend[j - 1]);
+                main.insert(main.begin() + pos, pend[j - 1]);
+            }       
+            last = groupStart;   
+        }
+    }
+    
+    return main;
 }
 
 std::vector<std::vector<int> > PmergeMe::pairAndSortVector(){

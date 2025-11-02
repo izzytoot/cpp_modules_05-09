@@ -6,7 +6,7 @@
 /*   By: isabeltootill <isabeltootill@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:39:21 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/11/01 14:09:08 by isabeltooti      ###   ########.fr       */
+/*   Updated: 2025/11/02 12:53:31 by isabeltooti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ class PmergeMe{
 
         std::vector<std::vector<int> > pairAndSortVector();
         std::vector<std::vector<int> > vectorRecursiveSorting(std::vector<std::vector<int> > groups, int lvl, size_t gSize);
-            
+        std::vector<std::vector<int> > reSizeNextRound(const std::vector<std::vector<int> >& recGroups, size_t gSize);
+   
     public:
         PmergeMe();
         PmergeMe(const PmergeMe& src);
