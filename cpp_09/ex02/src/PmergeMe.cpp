@@ -6,7 +6,7 @@
 /*   By: isabeltootill <isabeltootill@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:39:21 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/11/02 18:12:41 by isabeltooti      ###   ########.fr       */
+/*   Updated: 2025/11/03 22:49:47 by isabeltooti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 PmergeMe::PmergeMe(){}
 
-PmergeMe::PmergeMe(const PmergeMe& src): _dequeBefore(src._dequeBefore), _vectorBefore(src._vectorBefore),_dequeAfter(src._dequeAfter), _vectorAfter(src._vectorAfter) {}
+PmergeMe::PmergeMe(const PmergeMe& src): _deqBefore(src._deqBefore), _vecBefore(src._vecBefore),_deqAfter(src._deqAfter), _vecAfter(src._vecAfter) {}
 
 PmergeMe& PmergeMe::operator= (const PmergeMe& src){
     if (this != &src){
-        this->_dequeBefore = src._dequeBefore;
-        this->_vectorBefore = src._vectorBefore;
-        this->_dequeAfter = src._dequeAfter;
-        this->_vectorAfter = src._vectorAfter;
+        this->_deqBefore = src._deqBefore;
+        this->_vecBefore = src._vecBefore;
+        this->_deqAfter = src._deqAfter;
+        this->_vecAfter = src._vecAfter;
     }
     return *this;
 }
@@ -44,8 +44,8 @@ void PmergeMe::fillContainers(int ac, char** av){
             currNb = std::atoi(val.c_str());
             if (currNb < 0 || currNb > 1000)
                 throw std::runtime_error(RED "Error: invalid input value" RES);
-            this->_vectorBefore.push_back(currNb);
-            this->_dequeBefore.push_back(currNb);   
+            this->_vecBefore.push_back(currNb);
+            this->_deqBefore.push_back(currNb);   
         }
         else
             throw std::runtime_error(RED "Error: empty argument" RES);
@@ -85,7 +85,16 @@ std::vector<std::vector<int> > PmergeMe::reSizeNextRound(const std::vector<std::
     return reSizedGroups;
 }
 
-std::vector<std::vector<int> > PmergeMe::vectorRecursiveSorting(std::vector<std::vector<int> > groups, int lvl, size_t gSize){
+std::vector<int> PmergeMe::createJacobSthalSeq(size_t size){
+    
+}
+
+
+size_t binarySearchVec(std::vector<std::vector<int> > main, std::vector<int> pend){
+    
+}
+
+std::vector<std::vector<int> > PmergeMe::vecRecursiveSorting(std::vector<std::vector<int> > groups, int lvl, size_t gSize){
         
     std::vector<std::vector<int> > nextRound;
     lvl++;
@@ -115,7 +124,7 @@ std::vector<std::vector<int> > PmergeMe::vectorRecursiveSorting(std::vector<std:
     std::cout << std::endl;
 
     if (!(nextRound.size() < 2 || (nextRound[0].size() != nextRound[1].size()))){
-        std::vector<std::vector<int> > recGroups = vectorRecursiveSorting(nextRound, lvl, (gSize * 2));
+        std::vector<std::vector<int> > recGroups = vecRecursiveSorting(nextRound, lvl, (gSize * 2));
         groups = reSizeNextRound(recGroups, (gSize * 2));
     }
     
@@ -166,33 +175,33 @@ std::vector<std::vector<int> > PmergeMe::vectorRecursiveSorting(std::vector<std:
     }
     std::cout << std::endl;
     
-    //HERE - UNDERSTAND AND CREATE 2 FUNCTS
     if (!pend.empty()){
         std::vector<int> jacobSthalSeq = createJacobSthalSeq(pend.size());
         size_t last = 0; //why??
         
         for (size_t i = 0; i < jacobSthalSeq.size(); i++){
-            size_t groupStart = jacobSthalSeq[i]; //print
+            size_t groupStart = jacobSthalSeq[i];
+            
             if (groupStart > pend.size())
-                groupStart = pend.size(); //why?
+                groupStart = pend.size();
+                
             for (size_t j = groupStart; j > last; j--){
                 size_t pos = binarySearchVec(main, pend[j - 1]);
                 main.insert(main.begin() + pos, pend[j - 1]);
-            }       
-            last = groupStart;   
+            }      
+            last = groupStart;
         }
     }
-    
     return main;
 }
 
-std::vector<std::vector<int> > PmergeMe::pairAndSortVector(){
+std::vector<std::vector<int> > PmergeMe::pairAndSortVec(){
     std::vector<std::vector<int> > groups;
 
-    for (size_t i = 0; (i + 1) < this->_vectorBefore.size(); i += 2){
+    for (size_t i = 0; (i + 1) < this->_vecBefore.size(); i += 2){
         std::vector<int> pair;
-        int a = this->_vectorBefore[i];
-        int b = this->_vectorBefore[i + 1];
+        int a = this->_vecBefore[i];
+        int b = this->_vecBefore[i + 1];
 
         if (a < b){
             pair.push_back(a);
@@ -205,9 +214,9 @@ std::vector<std::vector<int> > PmergeMe::pairAndSortVector(){
         groups.push_back(pair);
     }
     
-    if (this->_vectorBefore.size() % 2 != 0){
+    if (this->_vecBefore.size() % 2 != 0){
         std::vector<int> oddNb;
-        oddNb.push_back(this->_vectorBefore.back());
+        oddNb.push_back(this->_vecBefore.back());
         groups.push_back(oddNb);
     }
     
@@ -218,32 +227,30 @@ std::vector<std::vector<int> > PmergeMe::pairAndSortVector(){
     }
     std::cout << std::endl;
 
-    std::vector<std::vector<int> > finalVec = vectorRecursiveSorting(groups, 1, 1);
+    std::vector<std::vector<int> > finalVec = vecRecursiveSorting(groups, 1, 1);
 
     return (finalVec);
 }
 
 void PmergeMe::sort(){  
     std::cout << YEL << "Before for vector: " << RES;
-    for (size_t j = 0; j < this->_vectorBefore.size(); j++)
-        std::cout << this->_vectorBefore[j] << " ";
+    for (size_t j = 0; j < this->_vecBefore.size(); j++)
+        std::cout << this->_vecBefore[j] << " ";
     std::cout << std::endl;
 
     try{
         clock_t start = clock();
-        std::vector<std::vector<int> > vecFJPhase1 = pairAndSortVector();
-        //phase 2
-        //phase 3
+        std::vector<std::vector<int> > sortedVec = pairAndSortVec();
         clock_t end = clock();
         
-        std::cout << YEL << "Vector phase 1: " << RES;
-        for (int i = 0; i < static_cast<int>(vecFJPhase1.size()); i++){
-            for (int j = 0; j < static_cast<int>(vecFJPhase1[i].size()); j++)
-            std::cout << vecFJPhase1[i][j] << " ";
+        std::cout << YEL << "Final vector: " << RES;
+        for (int i = 0; i < static_cast<int>(sortedVec.size()); i++){
+            for (int j = 0; j < static_cast<int>(sortedVec[i].size()); j++)
+            std::cout << sortedVec[i][j] << " ";
         }  
         std::cout << std::endl;
         long _time = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000; // Convert to microseconds
-        std::cout << YEL << "Time to process a range of " << this->_vectorBefore.size() << " elements with" << BYEL << " std::vector: " << RES << _time << " us" << std::endl;
+        std::cout << YEL << "Time to process a range of " << this->_vecBefore.size() << " elements with" << BYEL << " std::vector: " << RES << _time << " us" << std::endl;
         
     } catch (std::exception& e){}
     
