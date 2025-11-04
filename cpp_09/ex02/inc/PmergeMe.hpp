@@ -6,7 +6,7 @@
 /*   By: isabeltootill <isabeltootill@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:39:21 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/11/03 22:47:46 by isabeltooti      ###   ########.fr       */
+/*   Updated: 2025/11/04 19:39:48 by isabeltooti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ class PmergeMe{
         std::vector<std::vector<int> > pairAndSortVec();
         std::vector<std::vector<int> > vecRecursiveSorting(std::vector<std::vector<int> > groups, int lvl, size_t gSize);
         std::vector<std::vector<int> > reSizeNextRound(const std::vector<std::vector<int> >& recGroups, size_t gSize);
-        std::vector<int> createJacobSthalSeq(size_t size);
+        std::vector<int> jacobSthalSeqVec(size_t max);
+        size_t binarySearchVec(std::vector<std::vector<int> >& main, std::vector<int> pendValue);
+
 ;
     public:
         PmergeMe();
