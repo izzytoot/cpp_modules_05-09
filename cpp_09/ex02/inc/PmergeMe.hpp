@@ -6,7 +6,7 @@
 /*   By: isabeltootill <isabeltootill@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:39:21 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/11/04 19:39:48 by isabeltooti      ###   ########.fr       */
+/*   Updated: 2025/11/05 19:14:21 by isabeltooti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,26 @@
 
 class PmergeMe{
     private:
-        std::deque<int> _deqBefore;
-        std::vector<int> _vecBefore;
-        std::deque<int> _deqAfter;
-        std::vector<int> _vecAfter;
+        std::deque<int> _deq;
+        std::vector<int> _vec;
+        bool _debug;
+
+        std::vector<std::vector<int> > reSizeNextRoundVec(const std::vector<std::vector<int> >& recGroups, size_t gSize);
+        std::vector<int> jacobSthalSeqVec(size_t max);
+        size_t binarySearchVec(std::vector<std::vector<int> >& main, std::vector<int> pendValue);
 
         std::vector<std::vector<int> > pairAndSortVec();
         std::vector<std::vector<int> > vecRecursiveSorting(std::vector<std::vector<int> > groups, int lvl, size_t gSize);
-        std::vector<std::vector<int> > reSizeNextRound(const std::vector<std::vector<int> >& recGroups, size_t gSize);
-        std::vector<int> jacobSthalSeqVec(size_t max);
-        size_t binarySearchVec(std::vector<std::vector<int> >& main, std::vector<int> pendValue);
+        std::vector<std::vector<int> > unfoldAndGroupVec(std::vector<std::vector<int > > groups, size_t gSize, int lvl, int flag);
+
+        
+        std::deque<std::deque<int> > reSizeNextRoundDeq(const std::deque<std::deque<int> >& recGroups, size_t gSize);
+        std::deque<int> jacobSthalSeqDeq(size_t max);
+        size_t binarySearchDeq(std::deque<std::deque<int> >& main, std::deque<int> pendValue);
+        
+        std::deque<std::deque<int> > pairAndSortDeq();
+        std::deque<std::deque<int> > deqRecursiveSorting(std::deque<std::deque<int> > groups, int lvl, size_t gSize);
+        std::deque<std::deque<int> > unfoldAndGroupDeq(std::deque<std::deque<int > > groups, size_t gSize, int lvl, int flag);
 
 ;
     public:
@@ -51,5 +61,5 @@ class PmergeMe{
         ~PmergeMe();
         
         void fillContainers(int ac, char** av);
-        void sort();
+        void sort(bool debug);
 };

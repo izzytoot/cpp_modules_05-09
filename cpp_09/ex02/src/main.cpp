@@ -6,7 +6,7 @@
 /*   By: isabeltootill <isabeltootill@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:39:21 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/10/19 01:00:13 by isabeltooti      ###   ########.fr       */
+/*   Updated: 2025/11/05 18:42:30 by isabeltooti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int main (int ac, char** av){
     try {
         PmergeMe sequence;
         sequence.fillContainers(ac, av);
-        sequence.sort();
+        sequence.sort(0);
     } catch(const std::exception& e){
         std::cerr << e.what() << std::endl;
         return 1;
