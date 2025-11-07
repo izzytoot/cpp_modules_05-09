@@ -6,7 +6,7 @@
 /*   By: isabeltootill <isabeltootill@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:39:21 by icunha-t          #+#    #+#             */
-/*   Updated: 2025/10/16 23:03:14 by isabeltooti      ###   ########.fr       */
+/*   Updated: 2025/11/07 19:31:38 by isabeltooti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ class BitcoinExchange{
         std::map<std::string, float> _db;
 
         float getRate(const std::string& date) const;
-        std::string trimString(std::string str) const;
         bool isValidDate(const std::string& dateStr);
         bool isValidValue(const std::string& valueStr);
 
@@ -44,7 +43,7 @@ class BitcoinExchange{
         BitcoinExchange& operator= (const BitcoinExchange& src);
         ~BitcoinExchange();
 
-        void loadDataBase(const std::string& dbFile);//done
+        void loadDataBase(const std::string& dbFile);
         void convert(std::string inputFile);
 
     class invalidStrToFloat: public std::exception{
@@ -53,5 +52,6 @@ class BitcoinExchange{
     };
 };
 
+std::string trimString(std::string str);
 float toFloat(const std::string& str);
 int toInt(const std::string& str);
