@@ -4,7 +4,7 @@
 
 NAME = btc
 CC = c++
-CFLAGS = -Wall -Wextra -Werror -g -std=c++98 -Wshadow -Wno-shadow 
+CFLAGS = -Wall -Wextra -Werror -g -std=c++98
 
 ################################################################################
 #                                 PROGRAM'S SRCS                               #
