@@ -6,6 +6,6 @@
 | [CPP_06] | C++ Casts | (00) Conversion of scalar types; (01) Serialization; (02) Identify real type; | done | C++ | 100 / 100 ✅ |
 | [CPP_07] | C++ Templates | (00) Start with a few functions; (01) Iter; (02) Array | done | C++ | 100 / 100 ✅ |
 | [CPP_08] | Templated containers, iterators, algorithms | (00) Easy find; (01) Span; (02) Mutated abomination | done | C++ | 100 / 100 ✅ |
-| [CPP_09] | STL (containters) | (00) Bitcoin Exchange; (01) Reverse Polish Notation; (02) PmergeMe | To be done | C++ | :soon: / :question: |
+| [CPP_09] | STL (containters) | (00) Bitcoin Exchange; (01) Reverse Polish Notation; (02) PmergeMe | To be done | C++ | 100 / 100 ✅ |
 
 </div>
